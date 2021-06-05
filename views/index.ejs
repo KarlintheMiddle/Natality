@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Natality</title>
+    </head>
+    <body>
+        <h1>Las Piñas City Health Office</h1>
+
+        <h1>Submit</h1>
+
+        <form action="/quotes" method="POST">
+            <input type="text" placeholder="name" name="name">
+            <input type="text" placeholder="quote" name="quote">
+            <button type="submit">Submit</button>
+        </form>
+        
+        <h1>Update</h1>
+
+        <form action="/update" method="POST">
+            <input type="text" placeholder="name" name="find">
+            <input type="text" placeholder="name" name="name">
+            <input type="text" placeholder="quote" name="quote">
+            <button type="submit">Update</button>
+        </form>
+
+        <h1>Delete</h1>
+
+        <form action="/delete" method="POST">
+            <input type="text" placeholder="name" name="deleteFind">
+            <button type="submit">Delete</button>
+        </form>
+        
+
+        <h2> Quotes </h2>
+
+        <ul class="quotes">
+          <!-- Loop through quotes -->
+          <% for(var i = 0; i < quotes.length; i++) {%>
+            <li class="quote">
+            <!-- Output quote from the iterated quote object -->
+              <span><%= quotes[i]._id %></span>:-    
+              <!-- Output name from the iterated quote object -->
+              <span><%= quotes[i].name %></span>:
+              <!-- Output quote from the iterated quote object -->
+              <span><%= quotes[i].quote %></span>
+            </li>
+          <% } %>
+        </ul>
+
+
+        <!-- <section data-position="update-quote">
+            <div>
+              <h2>Darth Vadar invades!</h2>
+              <p>
+                Replace first Yoda's quote with a quote written by Darth Vadar
+              </p>
+              <button id="update-button">Update</button>
+            </div>
+          </section> -->
+        
+
+
+        <script src="/main.js"></script>
+    </body>
+</html>
