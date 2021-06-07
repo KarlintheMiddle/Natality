@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Natality</title>
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <script>
+          $(function() {
+            $("#navigation").load("/navigation.html");
+            
+          });
+        </script>
+
+        <script>
+          $(document).ready( function () {
+              var table = $('#example').DataTable();
+              
+              $('#example tbody').on( 'click', 'tr', function () {
+                  console.log( table.row( this ).data() );
+
+                  document.getElementById("dbID").value = table.row( this ).data()[0];
+                  document.getElementById("updod").value = table.row( this ).data()[1];
+                  document.getElementById("upfname").value = table.row( this ).data()[2];
+                  document.getElementById("upmname").value = table.row( this ).data()[3];
+                  document.getElementById("uplname").value = table.row( this ).data()[4];
+                  document.getElementById("upbday").value = table.row( this ).data()[5];
+                  document.getElementById("upage").value = table.row( this ).data()[6];
+                  document.getElementById("upicd10").value = table.row( this ).data()[7];
+                  document.getElementById("upcod").value = table.row( this ).data()[8];
+                  document.getElementById("uppod").value = table.row( this ).data()[9];
+                  document.getElementById("upbarangay").value = table.row( this ).data()[10];
+
+                  document.getElementById("delID").value = table.row( this ).data()[0];
+                  document.getElementById("deldod").value = table.row( this ).data()[1];
+                  document.getElementById("delfname").value = table.row( this ).data()[2];
+                  document.getElementById("delmname").value = table.row( this ).data()[3];
+                  document.getElementById("dellname").value = table.row( this ).data()[4];
+                  document.getElementById("delbday").value = table.row( this ).data()[5];
+                  document.getElementById("delage").value = table.row( this ).data()[6];
+                  document.getElementById("delicd10").value = table.row( this ).data()[7];
+                  document.getElementById("delcod").value = table.row( this ).data()[8];
+                  document.getElementById("delpod").value = table.row( this ).data()[9];
+                  document.getElementById("delbarangay").value = table.row( this ).data()[10];
+
+
+                  
+                 
+              } );
+
+              $('#example tbody').on('click', 'tr', function() {
+                $('#example tbody > tr').removeClass('selected');
+                $(this).addClass('selected');
+              });
+              
+
+              
+             
+          } );
+
+         
+        </script>
+    </head>
+    <body>
+      
+      
+        <div id="navigation"></div>
+
+
+        <h1>Submit</h1>
+
+        <form action="/quotes" method="POST">
+            <input type="date" placeholder="Date of Death" name="dateOfDeath">
+            <input type="text" placeholder="First Name" name="fname">
+            <input type="text" placeholder="Middle Name" name="mname">
+            <input type="text" placeholder="Last Name" name="lname">
+            <input type="date" placeholder="Birthday" name="bday">
+            <input type="text" placeholder="Age" name="age">
+            <input type="text" placeholder="ICD-10 Code" name="icd10">
+            <input type="text" placeholder="Cause of Death" name="causeofdeath">
+            <input type="text" placeholder="Place of Death" name="placeofdeath">
+            <input type="text" placeholder="Barangay" name="Barangay">
+            
+            <button type="submit">Submit</button>
+        </form>
+        
+        <h1>Update</h1>
+
+        <form action="/update" method="POST">
+          <input style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
+          <input type="date" placeholder="Date of Death" name="dateOfDeath" id="updod">
+          <input type="text" placeholder="First Name" name="fname" id="upfname">
+          <input type="text" placeholder="Middle Name" name="mname" id="upmname">
+          <input type="text" placeholder="Last Name" name="lname" id="uplname">
+          <input type="date" placeholder="Birthday" name="bday" id="upbday">
+          <input type="text" placeholder="Age" name="age" id="upage">
+          <input type="text" placeholder="ICD-10 Code" name="icd10" id="upicd10">
+          <input type="text" placeholder="Cause of Death" name="causeofdeath" id="upcod">
+          <input type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">
+          <input type="text" placeholder="Barangay" name="Barangay" id="upbarangay">
+          
+          <button type="submit">Update</button>
+        </form>
+
+        <h1>Delete</h1>
+
+        <form action="/delete" method="POST">
+          <input style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
+          <input type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">
+          <input type="text" placeholder="First Name" name="fname" id="delfname">
+          <input type="text" placeholder="Middle Name" name="mname" id="delmname">
+          <input type="text" placeholder="Last Name" name="lname" id="dellname">
+          <input type="date" placeholder="Birthday" name="bday" id="delbday">
+          <input type="text" placeholder="Age" name="age" id="delage">
+          <input type="text" placeholder="ICD-10 Code" name="icd10" id="delicd10">
+          <input type="text" placeholder="Cause of Death" name="causeofdeath" id="delcod">
+          <input type="text" placeholder="Place of Death" name="placeofdeath" id="delpod">
+          <input type="text" placeholder="Barangay" name="Barangay" id="delbarangay">
+          
+          <button type="submit">Delete</button>
+        </form>
+        
+
+        
+
+    
+
+        <table style="width: 100%;" id="example" class="display">
+          <thead>
+            <tr>
+              <th style="display: none;">ID</th>
+              <th>Date of Death</th>
+              <th>First Name</th>
+              <th>Middle Name</th>
+              <th>Last Name</th>
+              <th>Birthday</th>
+              <th>Age</th>
+              <th>ICD-10 Code</th>
+              <th>Cause of Death</th>
+              <th>Place of Death</th>
+              <th>Barangay</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <% for(var i = 0; i < quotes.length; i++) {%>
+            <tr>
+              <td style="display: none;"><%= quotes[i]._id %></td>
+              <td><%= quotes[i].dateOfDeath %></td>
+              <td><%= quotes[i].fname %></td>
+              <td><%= quotes[i].mname %></td>
+              <td><%= quotes[i].lname %></td>
+              <td><%= quotes[i].bday %></td>
+              <td><%= quotes[i].age %></td>
+              <td><%= quotes[i].icd10 %></td>
+              <td><%= quotes[i].causeofdeath %></td>
+              <td><%= quotes[i].placeofdeath %></td>
+              <td><%= quotes[i].barangay %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+
+
+        
+        
+    </body>
+</html>

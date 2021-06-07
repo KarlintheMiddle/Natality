@@ -3,6 +3,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const MongoClient= require('mongodb').MongoClient
+const ObjectID = require('mongodb').ObjectID;
+
 const app = express()
 
 const connectionString = 'mongodb+srv://Karl:Lpcho123@cluster0.uamuz.mongodb.net/Natality?retryWrites=true&w=majority'
@@ -18,9 +20,8 @@ app.listen(3000, function(){
 
 
 // app.get('/', function(req, res)  {
-//     res.sendFile(__dirname + '/index.html')
-// })
-
+//     res.sendFile(__dirname + '/public/pages/death.ejs')
+//  })
 
 
 MongoClient.connect(connectionString, {
@@ -35,8 +36,22 @@ MongoClient.connect(connectionString, {
     
     //middlewares
     app.set('view engine', 'ejs')
-    app.use(express.static('public'))
+    app.use('/',express.static(__dirname + '/public'));
+    app.use('/',express.static(__dirname + '/views'));
     app.use(express.json())
+    
+
+    app.get('/death', (req, res) => {
+        db.collection('quotes').find().toArray()
+        .then(results => {
+            console.log("Death page Data retrieve")
+            res.render('death.ejs', {quotes: results})
+            
+        })
+        .catch(error => console.error(error))
+        // ...
+        
+      })
 
 
 
@@ -46,11 +61,16 @@ MongoClient.connect(connectionString, {
         .then(results => {
             console.log("Data retrieve")
             res.render('index.ejs', {quotes: results})
+            
         })
         .catch(error => console.error(error))
         // ...
         
       })
+
+      
+
+   
     
     
     //submit
@@ -66,15 +86,33 @@ MongoClient.connect(connectionString, {
 
     //update
     app.post('/update', (req, res) => {
-        var findName = req.body.find;
-        var updateName = req.body.name;
-        var updateQuote = req.body.quote
+        var findID = new ObjectID(req.body.id);
+        var updateDOD = req.body.dateOfDeath;
+        var updateFirstName = req.body.fname;
+        var updateMiddleName = req.body.mname;
+        var updateLastName = req.body.lname;
+        var updateBirthday = req.body.bday;
+        var updateAge = req.body.age;
+        var updateICD10 = req.body.icd10;
+        var updateCOD = req.body.causeofdeath;
+        var updatePOD = req.body.placeofdeath;
+        var updateBarangay = req.body.Barangay;
+        
         quotesCollection.findOneAndUpdate(
-            {name: req.body.find},
+            {_id: findID},
             {
                 $set: {
-                    name: req.body.name,
-                    quote: req.body.quote
+                    dateOfDeath: updateDOD,
+                    fname: updateFirstName,
+                    mname: updateMiddleName,
+                    lname: updateLastName,
+                    bday: updateBirthday,
+                    age: updateAge,
+                    icd10: updateICD10,
+                    causeofdeath: updateCOD,
+                    placeofdeath: updatePOD,
+                    barangay: updateBarangay
+
                 }
             },
             {
@@ -92,9 +130,9 @@ MongoClient.connect(connectionString, {
 
     //Delete
     app.post('/delete', (req, res) => {
-        
+        var findID = new ObjectID(req.body.delid);
         quotesCollection.deleteOne(
-            {name: req.body.deleteFind},
+            {_id: findID},
             
         )
         .then(result => {
