@@ -73,18 +73,18 @@ MongoClient.connect(connectionString, {
    
     
     
-    //submit
+    //submit death.ejs
         app.post('/quotes', (req, res) => {
         quotesCollection.insertOne(req.body)
         .then(result => {
             console.log("Submitted to database")
-            res.redirect('/')
+            res.redirect('death')
         })
         .catch(error => console.error(error))
     })
 
 
-    //update
+    //update death.ejs
     app.post('/update', (req, res) => {
         var findID = new ObjectID(req.body.id);
         var updateDOD = req.body.dateOfDeath;
@@ -122,13 +122,13 @@ MongoClient.connect(connectionString, {
         )
         .then(result => {
             console.log("Update Succesful")
-            res.redirect('/')
+            res.redirect('death')
         })
         .catch(error => console.error(error))
         
     })
 
-    //Delete
+    //Delete death.ejs
     app.post('/delete', (req, res) => {
         var findID = new ObjectID(req.body.delid);
         quotesCollection.deleteOne(
@@ -139,10 +139,10 @@ MongoClient.connect(connectionString, {
 
             if (result.deletedCount == 0){
                 console.log("No data to delete")
-                return res.redirect('/')
+                return res.redirect('death')
             }
             console.log("Delete Succesful")
-            res.redirect('/')
+            res.redirect('death')
         })
         .catch(error => console.error(error))
         
