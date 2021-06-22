@@ -76,68 +76,78 @@
     </head>
     <body>
       
+      <div id="navigation"></div>
+
+      <div class="container-fluid p-3 my-3 border">
+          <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Submit')" id="defaultOpen">Submit</button>
+            <button class="tablinks" onclick="openCity(event, 'Update')">Update</button>
+            <button class="tablinks" onclick="openCity(event, 'Delete')">Delete</button>
+          </div>
+
+
+          <div id="Submit" class="tabcontent" >
+            <h1>Submit</h1>
+
+            <form action="/quotes" method="POST">
+                <input type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod">
+                <input type="text" placeholder="First Name" name="fname">
+                <input type="text" placeholder="Middle Name" name="mname">
+                <input type="text" placeholder="Last Name" name="lname">
+                <input type="date" placeholder="Birthday" name="bday">
+                <input type="text" placeholder="Age" name="age">
+                <input type="text" placeholder="ICD-10 Code" name="icd10">
+                <input type="text" placeholder="Cause of Death" name="causeofdeath">
+                <input type="text" placeholder="Place of Death" name="placeofdeath">
+                <input type="text" placeholder="Barangay" name="Barangay">
+                
+                <button type="submit">Submit</button>
+            </form>
+          </div>
+          
+          <div id="Update" class="tabcontent">
+            <h1>Update</h1>
+
+            <form action="/update" method="POST">
+              <input style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
+              <input type="date" placeholder="Date of Death" name="dateOfDeath" id="updod">
+              <input type="text" placeholder="First Name" name="fname" id="upfname">
+              <input type="text" placeholder="Middle Name" name="mname" id="upmname">
+              <input type="text" placeholder="Last Name" name="lname" id="uplname">
+              <input type="date" placeholder="Birthday" name="bday" id="upbday">
+              <input type="text" placeholder="Age" name="age" id="upage">
+              <input type="text" placeholder="ICD-10 Code" name="icd10" id="upicd10">
+              <input type="text" placeholder="Cause of Death" name="causeofdeath" id="upcod">
+              <input type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">
+              <input type="text" placeholder="Barangay" name="Barangay" id="upbarangay">
+              
+              <button type="submit">Update</button>
+            </form>
+          </div>
+          
+          <div id="Delete" class="tabcontent">
+            <h1>Delete</h1>
+
+            <form action="/delete" method="POST">
+              <input style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
+              <input type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">
+              <input type="text" placeholder="First Name" name="fname" id="delfname">
+              <input type="text" placeholder="Middle Name" name="mname" id="delmname">
+              <input type="text" placeholder="Last Name" name="lname" id="dellname">
+              <input type="date" placeholder="Birthday" name="bday" id="delbday">
+              <input type="text" placeholder="Age" name="age" id="delage">
+              <input type="text" placeholder="ICD-10 Code" name="icd10" id="delicd10">
+              <input type="text" placeholder="Cause of Death" name="causeofdeath" id="delcod">
+              <input type="text" placeholder="Place of Death" name="placeofdeath" id="delpod">
+              <input type="text" placeholder="Barangay" name="Barangay" id="delbarangay">
+              
+              <button type="submit">Delete</button>
+            </form>
+          </div>
       
-        <div id="navigation"></div>
-
-
-        <h1>Submit</h1>
-
-        <form action="/quotes" method="POST">
-            <input type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod">
-            <input type="text" placeholder="First Name" name="fname">
-            <input type="text" placeholder="Middle Name" name="mname">
-            <input type="text" placeholder="Last Name" name="lname">
-            <input type="date" placeholder="Birthday" name="bday">
-            <input type="text" placeholder="Age" name="age">
-            <input type="text" placeholder="ICD-10 Code" name="icd10">
-            <input type="text" placeholder="Cause of Death" name="causeofdeath">
-            <input type="text" placeholder="Place of Death" name="placeofdeath">
-            <input type="text" placeholder="Barangay" name="Barangay">
-            
-            <button type="submit">Submit</button>
-        </form>
-        
-        <h1>Update</h1>
-
-        <form action="/update" method="POST">
-          <input style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
-          <input type="date" placeholder="Date of Death" name="dateOfDeath" id="updod">
-          <input type="text" placeholder="First Name" name="fname" id="upfname">
-          <input type="text" placeholder="Middle Name" name="mname" id="upmname">
-          <input type="text" placeholder="Last Name" name="lname" id="uplname">
-          <input type="date" placeholder="Birthday" name="bday" id="upbday">
-          <input type="text" placeholder="Age" name="age" id="upage">
-          <input type="text" placeholder="ICD-10 Code" name="icd10" id="upicd10">
-          <input type="text" placeholder="Cause of Death" name="causeofdeath" id="upcod">
-          <input type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">
-          <input type="text" placeholder="Barangay" name="Barangay" id="upbarangay">
-          
-          <button type="submit">Update</button>
-        </form>
-
-        <h1>Delete</h1>
-
-        <form action="/delete" method="POST">
-          <input style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
-          <input type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">
-          <input type="text" placeholder="First Name" name="fname" id="delfname">
-          <input type="text" placeholder="Middle Name" name="mname" id="delmname">
-          <input type="text" placeholder="Last Name" name="lname" id="dellname">
-          <input type="date" placeholder="Birthday" name="bday" id="delbday">
-          <input type="text" placeholder="Age" name="age" id="delage">
-          <input type="text" placeholder="ICD-10 Code" name="icd10" id="delicd10">
-          <input type="text" placeholder="Cause of Death" name="causeofdeath" id="delcod">
-          <input type="text" placeholder="Place of Death" name="placeofdeath" id="delpod">
-          <input type="text" placeholder="Barangay" name="Barangay" id="delbarangay">
-          
-          <button type="submit">Delete</button>
-        </form>
-        
-
-        
-
+      </div>
     
-
+      <div class="container-fluid p-3 my-3 border" style="width: 100%;">
         <table style="width: 100%;" id="example" class="display">
           <thead>
             <tr>
@@ -173,7 +183,29 @@
             <% } %>
           </tbody>
         </table>
+      </div>
 
+    
+      <script>
+        function openCity(evt, cityName) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        </script>
+
+<script>
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  </script>
 
         
         
