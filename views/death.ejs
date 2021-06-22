@@ -6,22 +6,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Natality</title>
         <link rel="stylesheet" href="/style.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
+        
+        
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.css"/>
+ 
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.js"></script>
         <script>
           $(function() {
             $("#navigation").load("/navigation.html");
             document.getElementById("focusdod").focus();
           });
         </script>
+
+        <script>
+          function clicked(e)
+          {
+              if(!confirm('Are you sure?')) {
+                  e.preventDefault();
+              }
+          }
+        </script>
+
 
        
 
@@ -65,6 +78,12 @@
                 $('#example tbody > tr').removeClass('selected');
                 $(this).addClass('selected');
               });
+
+              new $.fn.dataTable.Buttons( table, {
+                    buttons: [
+                        'copy', 'excel', 'pdf'
+                    ]
+                } );
               
 
               
@@ -76,9 +95,7 @@
     </head>
     <body>
       
-
-      
-        <div id="navigation"></div>
+      <div id="navigation"></div>
 
       <div class="container-fluid p-3 my-3 border">
           <div class="tab">
@@ -91,19 +108,60 @@
           <div id="Submit" class="tabcontent" >
             <h1>Submit</h1>
 
+            
             <form action="/quotes" method="POST">
-                <input type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod">
-                <input type="text" placeholder="First Name" name="fname">
-                <input type="text" placeholder="Middle Name" name="mname">
-                <input type="text" placeholder="Last Name" name="lname">
-                <input type="date" placeholder="Birthday" name="bday">
-                <input type="text" placeholder="Age" name="age">
-                <input type="text" placeholder="ICD-10 Code" name="icd10">
-                <input type="text" placeholder="Cause of Death" name="causeofdeath">
-                <input type="text" placeholder="Place of Death" name="placeofdeath">
-                <input type="text" placeholder="Barangay" name="Barangay">
+
+              <div class="input-holder">
+                <div class="inputs">
+                  <label for="focusdod">Date of Death</label>
+                  <input type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod">
+                </div>
+                <div class="inputs">
+                  <label for="subfname">First Name</label>
+                  <input type="text" placeholder="First Name" name="fname" id="subfname">
+                </div>
+                <div class="inputs">
+                  <label for="submname">Middle Name</label>
+                  <input type="text" placeholder="Middle Name" name="mname" id="submname">
+                </div>
+                <div class="inputs">
+                  <label for="sublname">Last Name</label>
+                  <input type="text" placeholder="Last Name" name="lname" id="sublname">
+                </div>
+                <div class="inputs">
+                  <label for="subbday">Date of Birth</label>
+                  <input type="date" placeholder="Birthday" name="bday" id="subbday">  
+                </div>
+                <div class="inputs">
+                  <label for="subage">Age</label>
+                  <input type="text" placeholder="Age" name="age" id="subage">  
+                </div>
+                <div class="inputs">
+                  <label for="subicd10">ICD-10 Code</label>
+                  <input type="text" placeholder="ICD-10 Code" name="icd10" id="subicd10">  
+                </div>
+                <div class="inputs">
+                  <label for="subcod">Cause of Death</label>
+                  <input type="text" placeholder="Cause of Death" name="causeofdeath" id="subcod">  
+                </div>
+                <div class="inputs">
+                  <label for="subpod">Place of Death</label>
+                  <input type="text" placeholder="Place of Death" name="placeofdeath" id="sudpod">  
+                </div>
+                <div class="inputs">
+                  <label for="subbarangay">Barangay</label>
+                  <input type="text" placeholder="Barangay" name="barangay" id="subbarangay">  
+                </div>
                 
-                <button type="submit">Submit</button>
+                
+                
+              </div>
+              
+                  
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-size">Submit</button>
+              </div>
+                
             </form>
           </div>
           
@@ -111,19 +169,58 @@
             <h1>Update</h1>
 
             <form action="/update" method="POST">
-              <input style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
-              <input type="date" placeholder="Date of Death" name="dateOfDeath" id="updod">
-              <input type="text" placeholder="First Name" name="fname" id="upfname">
-              <input type="text" placeholder="Middle Name" name="mname" id="upmname">
-              <input type="text" placeholder="Last Name" name="lname" id="uplname">
-              <input type="date" placeholder="Birthday" name="bday" id="upbday">
-              <input type="text" placeholder="Age" name="age" id="upage">
-              <input type="text" placeholder="ICD-10 Code" name="icd10" id="upicd10">
-              <input type="text" placeholder="Cause of Death" name="causeofdeath" id="upcod">
-              <input type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">
-              <input type="text" placeholder="Barangay" name="Barangay" id="upbarangay">
+
+              <div class="input-holder">
+                <input style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
+
+                <div class="inputs">
+                  <label for="updod">Date of Death</label>
+                  <input type="date" placeholder="Date of Death" name="dateOfDeath" id="updod">  
+                </div>
+                <div class="inputs">
+                  <label for="upfname">First Name</label>
+                  <input type="text" placeholder="First Name" name="fname" id="upfname">
+                </div>
+                <div class="inputs">
+                  <label for="upmname">Middle Name</label>
+                  <input type="text" placeholder="Middle Name" name="mname" id="upmname">  
+                </div>
+                <div class="inputs">
+                  <label for="uplname">Last Name</label>
+                  <input type="text" placeholder="Last Name" name="lname" id="uplname">  
+                </div>
+                <div class="inputs">
+                  <label for="upbday">Date of Birth</label>
+                  <input type="date" placeholder="Birthday" name="bday" id="upbday">  
+                </div>
+                <div class="inputs">
+                  <label for="upage">Age</label>
+                  <input type="text" placeholder="Age" name="age" id="upage">  
+                </div>
+                <div class="inputs">
+                  <label for="upicd10">ICD-10 Code</label>
+                  <input type="text" placeholder="ICD-10 Code" name="icd10" id="upicd10">  
+                </div>
+                <div class="inputs">
+                  <label for="upcod">Cause of Death</label>
+                  <input type="text" placeholder="Cause of Death" name="causeofdeath" id="upcod">  
+                </div>
+                <div class="inputs">
+                  <label for="uppod">Place of Death</label>
+                  <input type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">  
+                </div>
+                <div class="inputs">
+                  <label for="upbarangay">Barangay</label>
+                  <input type="text" placeholder="Barangay" name="Barangay" id="upbarangay">  
+                </div>
+                
+              </div>
+
               
-              <button type="submit">Update</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-warning btn-size" onclick="clicked(event)">Update</button>
+              </div>
+              
             </form>
           </div>
           
@@ -131,19 +228,57 @@
             <h1>Delete</h1>
 
             <form action="/delete" method="POST">
-              <input style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
-              <input type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">
-              <input type="text" placeholder="First Name" name="fname" id="delfname">
-              <input type="text" placeholder="Middle Name" name="mname" id="delmname">
-              <input type="text" placeholder="Last Name" name="lname" id="dellname">
-              <input type="date" placeholder="Birthday" name="bday" id="delbday">
-              <input type="text" placeholder="Age" name="age" id="delage">
-              <input type="text" placeholder="ICD-10 Code" name="icd10" id="delicd10">
-              <input type="text" placeholder="Cause of Death" name="causeofdeath" id="delcod">
-              <input type="text" placeholder="Place of Death" name="placeofdeath" id="delpod">
-              <input type="text" placeholder="Barangay" name="Barangay" id="delbarangay">
+              <div class="input-holder">
+                <input style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
+
+                <div class="inputs">
+                  <label for="deldod">Date of Death</label>
+                  <input type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">  
+                </div>
+                <div class="inputs">
+                  <label for="delfname">First Name</label>
+                  <input type="text" placeholder="First Name" name="fname" id="delfname">  
+                </div>
+                <div class="inputs">
+                  <label for="delmname">Middle Name</label>
+                  <input type="text" placeholder="Middle Name" name="mname" id="delmname">  
+                </div>
+                <div class="inputs">
+                  <label for="dellname">Last Name</label>
+                  <input type="text" placeholder="Last Name" name="lname" id="dellname">  
+                </div>
+                <div class="inputs">
+                  <label for="delbday">Date of Birth</label>
+                  <input type="date" placeholder="Birthday" name="bday" id="delbday">  
+                </div>
+                <div class="inputs">
+                  <label for="delage">Age</label>
+                  <input type="text" placeholder="Age" name="age" id="delage">  
+                </div>
+                <div class="inputs">
+                  <label for="delicd10">ICD-10 Code</label>
+                  <input type="text" placeholder="ICD-10 Code" name="icd10" id="delicd10">  
+                </div>
+                <div class="inputs">
+                  <label for="delcod">Cause of Death</label>
+                  <input type="text" placeholder="Cause of Death" name="causeofdeath" id="delcod">  
+                </div>
+                <div class="inputs">
+                  <label for="delpod">Place of Death</label>
+                  <input type="text" placeholder="Place of Death" name="placeofdeath" id="delpod">  
+                </div>
+                <div class="inputs">
+                  <label for="delbarangay">Barangay</label>
+                  <input type="text" placeholder="Barangay" name="Barangay" id="delbarangay">  
+                </div>
               
-              <button type="submit">Delete</button>
+
+              </div>  
+              
+              <div class="form-group">
+                <button type="submit" class="btn btn-danger btn-size" onclick="clicked(event)">Delete</button>
+              </div>
+              
             </form>
           </div>
       
@@ -207,7 +342,10 @@
 <script>
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen").click();
-  </script>
+</script>
+
+
+
         
     </body>
 </html>
