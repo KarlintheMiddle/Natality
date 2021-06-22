@@ -3,65 +3,76 @@
 <html lang = "en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Natality</title>
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        <script>
+          $(function() {
+            $("#navigation").load("/navigation.html");
+            
+          });
+        </script>
+
+        <script>
+          $(document).ready( function () {
+              var table = $('#example').DataTable();
+              
+              $('#example tbody').on( 'click', 'tr', function () {
+                  console.log( table.row( this ).data() );
+
+                  document.getElementById("dbID").value = table.row( this ).data()[0];
+                  document.getElementById("updod").value = table.row( this ).data()[1];
+                  document.getElementById("upfname").value = table.row( this ).data()[2];
+                  document.getElementById("upmname").value = table.row( this ).data()[3];
+                  document.getElementById("uplname").value = table.row( this ).data()[4];
+                  document.getElementById("upbday").value = table.row( this ).data()[5];
+                  document.getElementById("upage").value = table.row( this ).data()[6];
+                  document.getElementById("upicd10").value = table.row( this ).data()[7];
+                  document.getElementById("upcod").value = table.row( this ).data()[8];
+                  document.getElementById("uppod").value = table.row( this ).data()[9];
+                  document.getElementById("upbarangay").value = table.row( this ).data()[10];
+
+                  document.getElementById("delID").value = table.row( this ).data()[0];
+                  document.getElementById("deldod").value = table.row( this ).data()[1];
+                  document.getElementById("delfname").value = table.row( this ).data()[2];
+                  document.getElementById("delmname").value = table.row( this ).data()[3];
+                  document.getElementById("dellname").value = table.row( this ).data()[4];
+                  document.getElementById("delbday").value = table.row( this ).data()[5];
+                  document.getElementById("delage").value = table.row( this ).data()[6];
+                  document.getElementById("delicd10").value = table.row( this ).data()[7];
+                  document.getElementById("delcod").value = table.row( this ).data()[8];
+                  document.getElementById("delpod").value = table.row( this ).data()[9];
+                  document.getElementById("delbarangay").value = table.row( this ).data()[10];
+
+
+                  
+                 
+              } );
+
+              $('#example tbody').on('click', 'tr', function() {
+                $('#example tbody > tr').removeClass('selected');
+                $(this).addClass('selected');
+              });
+              
+
+              
+             
+          } );
+
+         
+        </script>
     </head>
     <body>
-        <h1>Las Piñas City Health Office</h1>
-
-        <h1>Submit</h1>
-
-        <form action="/quotes" method="POST">
-            <input type="text" placeholder="name" name="name">
-            <input type="text" placeholder="quote" name="quote">
-            <button type="submit">Submit</button>
-        </form>
-        
-        <h1>Update</h1>
-
-        <form action="/update" method="POST">
-            <input type="text" placeholder="name" name="find">
-            <input type="text" placeholder="name" name="name">
-            <input type="text" placeholder="quote" name="quote">
-            <button type="submit">Update</button>
-        </form>
-
-        <h1>Delete</h1>
-
-        <form action="/delete" method="POST">
-            <input type="text" placeholder="name" name="deleteFind">
-            <button type="submit">Delete</button>
-        </form>
-        
-
-        <h2> Quotes </h2>
-
-        <ul class="quotes">
-          <!-- Loop through quotes -->
-          <% for(var i = 0; i < quotes.length; i++) {%>
-            <li class="quote">
-            <!-- Output quote from the iterated quote object -->
-              <span><%= quotes[i]._id %></span>:-    
-              <!-- Output name from the iterated quote object -->
-              <span><%= quotes[i].name %></span>:
-              <!-- Output quote from the iterated quote object -->
-              <span><%= quotes[i].quote %></span>
-            </li>
-          <% } %>
-        </ul>
-
-
-        <!-- <section data-position="update-quote">
-            <div>
-              <h2>Darth Vadar invades!</h2>
-              <p>
-                Replace first Yoda's quote with a quote written by Darth Vadar
-              </p>
-              <button id="update-button">Update</button>
-            </div>
-          </section> -->
-        
-
-
-        <script src="/main.js"></script>
+       <div id="navigation"></div>
     </body>
 </html>
