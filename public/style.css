@@ -37,3 +37,38 @@ body {font-family: Arial;}
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.container .btn-holder {
+  position: relative;
+bottom: 20px;
+right: 20px;
+}
+
+.container {
+  position: relative;
+
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
+  display: flex;
+}
+
+input, label {
+  display:block;
+  
+}
+
+.input-holder {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+.inputs{
+  display: table-cell;
+  
+}
+
+.btn-size {
+  width: 78px !important;
+}
