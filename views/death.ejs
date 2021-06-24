@@ -16,9 +16,9 @@
         
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.css"/>
  
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.js"></script>
         <script>
           $(function() {
             $("#navigation").load("/navigation.html");
@@ -35,12 +35,16 @@
           }
         </script>
 
-
-       
-
         <script>
           $(document).ready( function () {
-              var table = $('#example').DataTable();
+              var table = $('#example').DataTable({
+                  dom: 'Bfrtip',
+                  buttons: [
+                      'csv', 'print'
+                  ]
+              } );
+                        
+           
               
               $('#example tbody').on( 'click', 'tr', function () {
                   console.log( table.row( this ).data() );
@@ -79,11 +83,6 @@
                 $(this).addClass('selected');
               });
 
-              new $.fn.dataTable.Buttons( table, {
-                    buttons: [
-                        'copy', 'excel', 'pdf'
-                    ]
-                } );
               
 
               
