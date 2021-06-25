@@ -111,7 +111,7 @@ MongoClient.connect(connectionString, {
                     icd10: updateICD10,
                     causeofdeath: updateCOD,
                     placeofdeath: updatePOD,
-                    barangay: updateBarangay
+                    Barangay: updateBarangay
 
                 }
             },
