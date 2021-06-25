@@ -7,7 +7,7 @@
         <title>Natality</title>
         <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -101,24 +101,84 @@
         function submitbday() {
           var bday = document.getElementById("subbday").value;
           var b = +new Date(bday);
-          const now = new Date();
+          const now = +new Date(document.getElementById("focusdod").value);
           const diff = Math.abs(now - b);
-          const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
-          console.log(age)
+          console.log("diff " + diff);
+          const age = diff / (1000 * 60 * 60); 
+          console.log("Age" + age);
+          var shownAge = 0;
+          if (age < 24){
+            shownAge = age;
+            console.log("Hours" + shownAge);
+            updateAgeText("Less than a Day");
+          }
+          else if (age >= 24) {
+            shownAge =  age / 24;
+            if (shownAge < 30){
+              console.log(shownAge + " Day/s")
+              updateAgeText(shownAge + " Day/s");
+            }
+            else if (shownAge >= 30 && shownAge < 12){
+              console.log(shownAge + " Day/s")
+              shownAge = Math.round(shownAge / 30);
+              console.log(shownAge + " Month/s")
+              updateAgeText(shownAge + " Month/s");
+            }
+            else if (shownAge >= 365){
+              shownAge = Math.round(shownAge / 365);
+              console.log(shownAge + " Year/s")
+              updateAgeText(shownAge + " Year/s");
+            }
+          }
           
-          document.getElementById("subage").value = age;
+        }
+
+        function updateAgeText(a){
+          console.log(a)
+          
+          document.getElementById("subage").value = a;
+
         }
         </script>
         <script>
           function updatebday() {
           var upbday = document.getElementById("upbday").value;
           var upb = +new Date(upbday);
-          const upnow = new Date();
+          const upnow = document.getElementById("updod").value;
           const updiff = Math.abs(upnow - upb);
           const upage = Math.floor(updiff / (1000 * 60 * 60 * 24 * 365)); 
-          console.log(upage)
+          var shownAge = 0;
+          if (upage < 24){
+            shownAge = upage;
+            console.log("Hours" + shownAge);
+            updateAgeText2("Less than a Day");
+          }
+          else if (upage >= 24) {
+            shownAge =  upage / 24;
+            if (shownAge < 30){
+              console.log(shownAge + " Day/s")
+              updateAgeText2(shownAge + " Day/s");
+            }
+            else if (shownAge >= 30 && shownAge < 12){
+              console.log(shownAge + " Day/s")
+              shownAge = Math.round(shownAge / 30);
+              console.log(shownAge + " Month/s")
+              updateAgeText2(shownAge + " Month/s");
+            }
+            else if (shownAge >= 365){
+              shownAge = Math.round(shownAge / 365);
+              console.log(shownAge + " Year/s")
+              updateAgeText2(shownAge + " Year/s");
+            }
+          }
+
+        }
+
+        function updateAgeText2(a){
+          console.log(a)
           
-          document.getElementById("upage").value = upage;
+          document.getElementById("upage").value = a;
+
         }
         </script>
         
@@ -129,23 +189,36 @@
       <div id="navigation"></div>
 
       <div class="container-fluid p-3 my-3 border">
-          <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'Submit')" id="defaultOpen">Submit</button>
-            <button class="tablinks" onclick="openCity(event, 'Update')">Update</button>
-            <button class="tablinks" onclick="openCity(event, 'Delete')">Delete</button>
+          
+          <div class="w3-row">
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Submit')" id="defaultOpen">
+              <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
+                <h1 class="display-4 text-secondary">Submit</h1>
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Update')" id="defaultOpen">
+              <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
+                <h1 class="display-4 text-secondary">Update</h1>
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Delete')" id="defaultOpen">
+              <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
+                <h1 class="display-4 text-secondary">Delete</h1>
+              </div>
+            </a>
           </div>
 
 
-          <div id="Submit" class="tabcontent" >
-            <h1>Submit</h1>
-
+          <div id="Submit" class="w3-container tabcontent" >
+            <h1 class="display-5">Submit</h1>
+            <hr/>
             
             <form action="/quotes" method="POST">
 
               <div class= "form-group row">
                 <div class="col-lg-2">
                   <label for="focusdod">Date of Death</label>
-                  <input required type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control">
+                  <input required type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control" onChange="submitbday()">
                 </div>
                 <div class="col-lg-3 ">
                   <label for="subfname">First Name</label>
@@ -208,17 +281,19 @@
                   </SELECT>                </div>
               </div>
               
-                  
+              
               <div class="form-group">
                 <button type="submit" class="btn btn-success btn-size">Submit</button>
               </div>
+
+              <br>
                 
             </form>
           </div>
           
-          <div id="Update" class="tabcontent">
-            <h1>Update</h1>
-
+          <div id="Update" class="w3-container tabcontent">
+            <h1 class="display-5">Update</h1>
+            <hr/>
             <form action="/update" method="POST">
 
               <div class="form-group row">
@@ -293,13 +368,13 @@
               <div class="form-group">
                 <button type="submit" class="btn btn-warning btn-size" onclick="clicked(event)">Update</button>
               </div>
-              
+              <br>
             </form>
           </div>
           
-          <div id="Delete" class="tabcontent">
-            <h1>Delete</h1>
-
+          <div id="Delete" class="w3-container tabcontent">
+            <h1 class="display-5">Delete</h1>
+            <hr/>
             <form action="/delete" method="POST">
               <div class="form-group row">
                 <input required class="form-control" style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
@@ -374,7 +449,7 @@
               <div class="form-group">
                 <button type="submit" class="btn btn-danger btn-size" onclick="clicked(event)">Delete</button>
               </div>
-              
+              <br>
             </form>
           </div>
       
@@ -420,7 +495,7 @@
 
     
       <script>
-        function openCity(evt, cityName) {
+        function tabPane(evt, deathAction) {
           var i, tabcontent, tablinks;
           tabcontent = document.getElementsByClassName("tabcontent");
           for (i = 0; i < tabcontent.length; i++) {
@@ -428,10 +503,10 @@
           }
           tablinks = document.getElementsByClassName("tablinks");
           for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            tablinks[i].className = tablinks[i].className.replace(" w3-border-green", "");
           }
-          document.getElementById(cityName).style.display = "block";
-          evt.currentTarget.className += " active";
+          document.getElementById(deathAction).style.display = "block";
+          evt.currentTarget.firstElementChild.className += " w3-border-green";
         }
         </script>
 
