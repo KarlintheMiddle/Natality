@@ -144,31 +144,31 @@
           function updatebday() {
           var upbday = document.getElementById("upbday").value;
           var upb = +new Date(upbday);
-          const upnow = document.getElementById("updod").value;
+          const upnow = +new Date(document.getElementById("updod").value);
           const updiff = Math.abs(upnow - upb);
-          const upage = Math.floor(updiff / (1000 * 60 * 60 * 24 * 365)); 
-          var shownAge = 0;
+          const upage = updiff / (1000 * 60 * 60); 
+          var upshownAge = 0;
           if (upage < 24){
-            shownAge = upage;
-            console.log("Hours" + shownAge);
+            upshownAge = upage;
+            console.log("Hours" + upshownAge);
             updateAgeText2("Less than a Day");
           }
           else if (upage >= 24) {
-            shownAge =  upage / 24;
-            if (shownAge < 30){
-              console.log(shownAge + " Day/s")
-              updateAgeText2(shownAge + " Day/s");
+            upshownAge =  upage / 24;
+            if (upshownAge < 30){
+              console.log(upshownAge + " Day/s")
+              updateAgeText2(upshownAge + " Day/s");
             }
-            else if (shownAge >= 30 && shownAge < 12){
-              console.log(shownAge + " Day/s")
-              shownAge = Math.round(shownAge / 30);
-              console.log(shownAge + " Month/s")
-              updateAgeText2(shownAge + " Month/s");
+            else if (upshownAge >= 30 && upshownAge < 12){
+              console.log(upshownAge + " Day/s")
+              upshownAge = Math.round(upshownAge / 30);
+              console.log(upshownAge + " Month/s")
+              updateAgeText2(upshownAge + " Month/s");
             }
-            else if (shownAge >= 365){
-              shownAge = Math.round(shownAge / 365);
-              console.log(shownAge + " Year/s")
-              updateAgeText2(shownAge + " Year/s");
+            else if (upshownAge >= 365){
+              upshownAge = Math.round(upshownAge / 365);
+              console.log(upshownAge + " Year/s")
+              updateAgeText2(upshownAge + " Year/s");
             }
           }
 
@@ -301,7 +301,7 @@
 
                 <div class="col-lg-2">
                   <label for="updod">Date of Death</label>
-                  <input required class="form-control"  type="date" placeholder="Date of Death" name="dateOfDeath" id="updod">  
+                  <input required class="form-control"  type="date" placeholder="Date of Death" name="dateOfDeath" id="updod" onChange="updatebday()">  
                 </div>
                 <div class="col-lg-3">
                   <label for="upfname">First Name</label>

@@ -40,7 +40,7 @@ MongoClient.connect(connectionString, {
     app.use('/',express.static(__dirname + '/views'));
     app.use(express.json())
     
-
+    //allows the user to read data from the database 
     app.get('/death', (req, res) => {
         db.collection('quotes').find().toArray()
         .then(results => {
@@ -55,7 +55,7 @@ MongoClient.connect(connectionString, {
 
 
 
-    //allows the user to read data from the database
+    
     app.get('/', (req, res) => {
         db.collection('quotes').find().toArray()
         .then(results => {
