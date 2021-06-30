@@ -181,6 +181,28 @@
 
         }
         </script>
+        <!-- Validation -->
+        <script>
+          (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+              .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                  if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                  }
+
+                  form.classList.add('was-validated')
+                }, false)
+              })
+          })()
+        </script>
         
         
     </head>
@@ -213,12 +235,14 @@
             <h1 class="display-5">Submit</h1>
             <hr/>
             
-            <form action="/quotes" method="POST">
+            <form action="/quotes" method="POST" class="needs-validation" novalidate>
 
               <div class= "form-group row">
                 <div class="col-lg-2">
-                  <label for="focusdod">Date of Death</label>
+                  <label for="focusdod" class="form-label">Date of Death</label>
                   <input required type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control" onChange="submitbday()">
+                  <div id="valid-feedback">Looks good!</div>
+                  <div id="invalid-feedback">Please input required data</div>
                 </div>
                 <div class="col-lg-3 ">
                   <label for="subfname">First Name</label>
@@ -257,7 +281,8 @@
                 </div>
                 <div class="col-lg-2">
                   <label for="subbarangay">Barangay</label>
-                  <SELECT required name="Barangay" id="subbarangay" class="form-control">
+                  <input required name="Barangay" placeholder="Barangay" id="subbarangay" class="form-control" list="submitListBarangay">
+                  <datalist id="submitListBarangay">
                     <option value="ALMANZA 1" name="ALMANZA 1">ALMANZA 1</option>
                     <option value="ALMANZA 2" name="ALMANZA 2">ALMANZA 2</option>
                     <option value="CAA" name="CAA">CAA</option>
@@ -277,8 +302,8 @@
                     <option value="TALON 4" name="TALON 4">TALON 4</option>
                     <option value="TALON 5" name="TALON 5">TALON 5</option>
                     <option value="ZAPOTE" name="ZAPOTE">ZAPOTE</option>
-                    
-                  </SELECT>                </div>
+                  </datalist>
+                </input>                </div>
               </div>
               
               
@@ -337,9 +362,10 @@
                   <label for="uppod">Place of Death</label>
                   <input required class="form-control" type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">  
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2" role="combobox">
                   <label for="upbarangay">Barangay</label>
-                  <SELECT required placeholder="Barangay" name="Barangay" id="upbarangay" class="form-control">
+                  <input required placeholder="Barangay" name="Barangay" id="upbarangay" class="form-control" list="updateListBarangay">
+                  <datalist id="updateListBarangay">
                     <option value="ALMANZA 1">ALMANZA 1</option>
                     <option value="ALMANZA 2">ALMANZA 2</option>
                     <option value="CAA">CAA</option>
@@ -359,8 +385,9 @@
                     <option value="TALON 4">TALON 4</option>
                     <option value="TALON 5">TALON 5</option>
                     <option value="ZAPOTE">ZAPOTE</option>
+                  </datalist> 
                     
-                  </SELECT>                </div>
+                </input>                </div>
                 
               </div>
 
@@ -419,7 +446,8 @@
                 </div>
                 <div class="col-lg-2">
                   <label for="delbarangay">Barangay</label>
-                  <SELECT required placeholder="Barangay" name="Barangay" id="delbarangay" class="form-control">
+                  <input required placeholder="Barangay" name="Barangay" id="delbarangay" class="form-control" list="deleteListBarangay">
+                    <datalist id="deleteListBarangay">
                     <option value="ALMANZA 1">ALMANZA 1</option>
                     <option value="ALMANZA 2">ALMANZA 2</option>
                     <option value="CAA">CAA</option>
@@ -439,8 +467,9 @@
                     <option value="TALON 4">TALON 4</option>
                     <option value="TALON 5">TALON 5</option>
                     <option value="ZAPOTE">ZAPOTE</option>
+                  </datalist>
 
-                  </SELECT>
+                </input>
                 </div>
               
 
