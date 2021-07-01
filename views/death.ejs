@@ -181,29 +181,6 @@
 
         }
         </script>
-        <!-- Validation -->
-        <script>
-          (function () {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-              .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                  if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                  }
-
-                  form.classList.add('was-validated')
-                }, false)
-              })
-          })()
-        </script>
-        
         
     </head>
     <body>
@@ -241,8 +218,7 @@
                 <div class="col-lg-2">
                   <label for="focusdod" class="form-label">Date of Death</label>
                   <input required type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control" onChange="submitbday()">
-                  <div id="valid-feedback">Looks good!</div>
-                  <div id="invalid-feedback">Please input required data</div>
+                  
                 </div>
                 <div class="col-lg-3 ">
                   <label for="subfname">First Name</label>
@@ -265,7 +241,7 @@
                 </div>
                 <div class="col-lg-2">
                   <label for="subage">Age</label>
-                  <input required type="text" placeholder="Age" name="age" id="subage" class="form-control">  
+                  <input required type="text" placeholder="Age" name="age" id="subage" class="form-control" readonly>  
                 </div>
                 <div class="col-lg-2">
                   <label for="subicd10">ICD-10 Code</label>
@@ -319,7 +295,7 @@
           <div id="Update" class="w3-container tabcontent">
             <h1 class="display-5">Update</h1>
             <hr/>
-            <form action="/update" method="POST">
+            <form action="/update" method="POST" class="needs-validation" novalidate>
 
               <div class="form-group row">
                 <input  style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
@@ -348,7 +324,7 @@
                 </div>
                 <div class="col-lg-2">
                   <label for="upage">Age</label>
-                  <input required class="form-control" type="text" placeholder="Age" name="age" id="upage">  
+                  <input required class="form-control" type="text" placeholder="Age" name="age" id="upage" readonly>  
                 </div>
                 <div class="col-lg-2">
                   <label for="upicd10">ICD-10 Code</label>
@@ -402,7 +378,7 @@
           <div id="Delete" class="w3-container tabcontent">
             <h1 class="display-5">Delete</h1>
             <hr/>
-            <form action="/delete" method="POST">
+            <form action="/delete" method="POST" class="needs-validation" novalidate>
               <div class="form-group row">
                 <input required class="form-control" style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
 
@@ -430,7 +406,7 @@
                 </div>
                 <div class="col-lg-2">
                   <label for="delage">Age</label>
-                  <input required class="form-control" type="text" placeholder="Age" name="age" id="delage">  
+                  <input required class="form-control" type="text" placeholder="Age" name="age" id="delage" readonly>  
                 </div>
                 <div class="col-lg-2">
                   <label for="delicd10">ICD-10 Code</label>
@@ -543,6 +519,29 @@
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen").click();
 </script>
+<!-- Validation -->
+<script>
+  (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
+
 
 
 
