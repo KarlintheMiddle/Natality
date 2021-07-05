@@ -52,15 +52,24 @@ MongoClient.connect(connectionString, {
         // ...
         
       })
-
-
-
     
     app.get('/', (req, res) => {
         db.collection('quotes').find().toArray()
         .then(results => {
             console.log("Data retrieve")
             res.render('index.ejs', {quotes: results})
+            
+        })
+        .catch(error => console.error(error))
+        // ...
+        
+      })
+
+      app.get('/death-statistic', (req, res) => {
+        db.collection('quotes').find().toArray()
+        .then(results => {
+            console.log("Data retrieve")
+            res.render('death-statistic.ejs')
             
         })
         .catch(error => console.error(error))
