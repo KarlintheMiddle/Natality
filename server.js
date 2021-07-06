@@ -46,6 +46,7 @@ MongoClient.connect(connectionString, {
         .then(results => {
             console.log("Death page Data retrieve")
             res.render('death.ejs', {quotes: results})
+            console.log({quotes: results});
             
         })
         .catch(error => console.error(error))
@@ -57,25 +58,53 @@ MongoClient.connect(connectionString, {
         db.collection('quotes').find().toArray()
         .then(results => {
             console.log("Data retrieve")
-            res.render('index.ejs', {quotes: results})
+            
             
         })
         .catch(error => console.error(error))
         // ...
         
       })
-
+      var bar = {};
       app.get('/death-statistic', (req, res) => {
-        db.collection('quotes').find().toArray()
-        .then(results => {
-            console.log("Data retrieve")
-            res.render('death-statistic.ejs')
-            
-        })
-        .catch(error => console.error(error))
-        // ...
+        db.collection("quotes", function(err, collection) {
+            collection.find().sort({order_num: 1}).toArray(function(err, result) {
+              if (err) {
+                throw err;
+              } else {
+                for (i=0; i<result.length; i++) {
+                  collectionOne[i] = result[i];
+                }
+              }
+            });
+            db.collection("quotes", function(err, collection) {
+              collection.find().sort({order_num: 1}).toArray(function(err, result) {
+                if (err) {
+                  throw err;
+                } else {
+                  for (i=0; i<result.length; i++) {
+                    collectionTwo[i] = result[i];
+                  }
+                }
+              });
+            });
+            // Thank you aesede!
+            res.render('death-statistic.ejs', {
+              quotes: collectionOne,
+              quotes: collectionTwo
+            });
+            console.log({
+                quotes: collectionOne,
+                quotes: collectionTwo
+              });)
         
-      })
+      });
+    });
+
+  
+      
+
+
 
       
 

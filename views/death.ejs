@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Natality</title>
+        <title>Death</title>
         <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -195,12 +195,12 @@
                 <h1 class="display-4 text-secondary">Submit</h1>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="tabPane(event, 'Update')" id="defaultOpen">
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Update')">
               <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
                 <h1 class="display-4 text-secondary">Update</h1>
               </div>
             </a>
-            <a href="javascript:void(0)" onclick="tabPane(event, 'Delete')" id="defaultOpen">
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Delete')">
               <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
                 <h1 class="display-4 text-secondary">Delete</h1>
               </div>
@@ -499,21 +499,21 @@
       </div>
 
     
-      <script>
-        function tabPane(evt, deathAction) {
-          var i, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" w3-border-green", "");
-          }
-          document.getElementById(deathAction).style.display = "block";
-          evt.currentTarget.firstElementChild.className += " w3-border-green";
-        }
-        </script>
+<script>
+  function tabPane(evt, deathAction) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-border-green", "");
+    }
+    document.getElementById(deathAction).style.display = "block";
+    evt.currentTarget.firstElementChild.className += " w3-border-green";
+  }
+</script>
 
 <script>
   // Get the element with id="defaultOpen" and click on it
