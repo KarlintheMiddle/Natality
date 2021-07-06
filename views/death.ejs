@@ -4,10 +4,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Natality</title>
+        <title>Death</title>
         <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -19,6 +19,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
         <script src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.js"></script>
+        
+        <!-- Navbar -->
         <script>
           $(function() {
             $("#navigation").load("/navigation.html");
@@ -26,6 +28,7 @@
           });
         </script>
 
+        <!-- Validation -->
         <script>
           function clicked(e)
           {
@@ -35,6 +38,7 @@
           }
         </script>
 
+        <!-- Datatable -->
         <script>
           $(document).ready( function () {
               var table = $('#example').DataTable({
@@ -91,127 +95,275 @@
 
          
         </script>
+        
+        <!-- Age Calculator -->
+        <script>
+        function submitbday() {
+          var bday = document.getElementById("subbday").value;
+          var b = +new Date(bday);
+          const now = +new Date(document.getElementById("focusdod").value);
+          const diff = Math.abs(now - b);
+          console.log("diff " + diff);
+          const age = diff / (1000 * 60 * 60); 
+          console.log("Age" + age);
+          var shownAge = 0;
+          if (age < 24){
+            shownAge = age;
+            console.log("Hours" + shownAge);
+            updateAgeText("Less than a Day");
+          }
+          else if (age >= 24) {
+            shownAge =  age / 24;
+            if (shownAge < 30){
+              console.log(shownAge + " Day/s")
+              updateAgeText(shownAge + " Day/s");
+            }
+            else if (shownAge >= 30 && shownAge < 12){
+              console.log(shownAge + " Day/s")
+              shownAge = Math.round(shownAge / 30);
+              console.log(shownAge + " Month/s")
+              updateAgeText(shownAge + " Month/s");
+            }
+            else if (shownAge >= 365){
+              shownAge = Math.round(shownAge / 365);
+              console.log(shownAge + " Year/s")
+              updateAgeText(shownAge + " Year/s");
+            }
+          }
+          
+        }
+
+        function updateAgeText(a){
+          console.log(a)
+          
+          document.getElementById("subage").value = a;
+
+        }
+        </script>
+        <script>
+          function updatebday() {
+          var upbday = document.getElementById("upbday").value;
+          var upb = +new Date(upbday);
+          const upnow = +new Date(document.getElementById("updod").value);
+          const updiff = Math.abs(upnow - upb);
+          const upage = updiff / (1000 * 60 * 60); 
+          var upshownAge = 0;
+          if (upage < 24){
+            upshownAge = upage;
+            console.log("Hours" + upshownAge);
+            updateAgeText2("Less than a Day");
+          }
+          else if (upage >= 24) {
+            upshownAge =  upage / 24;
+            if (upshownAge < 30){
+              console.log(upshownAge + " Day/s")
+              updateAgeText2(upshownAge + " Day/s");
+            }
+            else if (upshownAge >= 30 && upshownAge < 12){
+              console.log(upshownAge + " Day/s")
+              upshownAge = Math.round(upshownAge / 30);
+              console.log(upshownAge + " Month/s")
+              updateAgeText2(upshownAge + " Month/s");
+            }
+            else if (upshownAge >= 365){
+              upshownAge = Math.round(upshownAge / 365);
+              console.log(upshownAge + " Year/s")
+              updateAgeText2(upshownAge + " Year/s");
+            }
+          }
+
+        }
+
+        function updateAgeText2(a){
+          console.log(a)
+          
+          document.getElementById("upage").value = a;
+
+        }
+        </script>
+        
     </head>
     <body>
       
       <div id="navigation"></div>
 
       <div class="container-fluid p-3 my-3 border">
-          <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'Submit')" id="defaultOpen">Submit</button>
-            <button class="tablinks" onclick="openCity(event, 'Update')">Update</button>
-            <button class="tablinks" onclick="openCity(event, 'Delete')">Delete</button>
+          
+          <div class="w3-row">
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Submit')" id="defaultOpen">
+              <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
+                <h1 class="display-4 text-secondary">Submit</h1>
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Update')">
+              <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
+                <h1 class="display-4 text-secondary">Update</h1>
+              </div>
+            </a>
+            <a href="javascript:void(0)" onclick="tabPane(event, 'Delete')">
+              <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
+                <h1 class="display-4 text-secondary">Delete</h1>
+              </div>
+            </a>
           </div>
 
 
-          <div id="Submit" class="tabcontent" >
-            <h1>Submit</h1>
-
+          <div id="Submit" class="w3-container tabcontent" >
+            <h1 class="display-5">Submit</h1>
+            <hr/>
             
-            <form action="/quotes" method="POST">
+            <form action="/quotes" method="POST" class="needs-validation" novalidate>
 
-              <div class="input-holder">
-                <div class="inputs">
-                  <label for="focusdod">Date of Death</label>
-                  <input type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod">
+              <div class= "form-group row">
+                <div class="col-lg-2">
+                  <label for="focusdod" class="form-label">Date of Death</label>
+                  <input required type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control" onChange="submitbday()">
+                  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3 ">
                   <label for="subfname">First Name</label>
-                  <input type="text" placeholder="First Name" name="fname" id="subfname">
+                  <input required type="text" placeholder="First Name" name="fname" id="subfname" class="form-control">
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="submname">Middle Name</label>
-                  <input type="text" placeholder="Middle Name" name="mname" id="submname">
+                  <input required type="text" placeholder="Middle Name" name="mname" id="submname" class="form-control">
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="sublname">Last Name</label>
-                  <input type="text" placeholder="Last Name" name="lname" id="sublname">
+                  <input required type="text" placeholder="Last Name" name="lname" id="sublname" class="form-control">
                 </div>
-                <div class="inputs">
+              </div>
+              <div class="form-group row">
+                <div class="col-lg-2">
                   <label for="subbday">Date of Birth</label>
-                  <input type="date" placeholder="Birthday" name="bday" id="subbday">  
+                  <input required type="date" placeholder="Birthday" name="bday" id="subbday" onChange="submitbday()" class="form-control">  
+                  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="subage">Age</label>
-                  <input type="text" placeholder="Age" name="age" id="subage">  
+                  <input required type="text" placeholder="Age" name="age" id="subage" class="form-control" readonly>  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="subicd10">ICD-10 Code</label>
-                  <input type="text" placeholder="ICD-10 Code" name="icd10" id="subicd10">  
+                  <input required type="text" placeholder="ICD-10 Code" name="icd10" id="subicd10" class="form-control">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="subcod">Cause of Death</label>
-                  <input type="text" placeholder="Cause of Death" name="causeofdeath" id="subcod">  
+                  <input required type="text" placeholder="Cause of Death" name="causeofdeath" id="subcod" class="form-control">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="subpod">Place of Death</label>
-                  <input type="text" placeholder="Place of Death" name="placeofdeath" id="sudpod">  
+                  <input required type="text" placeholder="Place of Death" name="placeofdeath" id="sudpod" class="form-control">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="subbarangay">Barangay</label>
-                  <input type="text" placeholder="Barangay" name="barangay" id="subbarangay">  
-                </div>
-                
-                
-                
+                  <input required name="Barangay" placeholder="Barangay" id="subbarangay" class="form-control" list="submitListBarangay">
+                  <datalist id="submitListBarangay">
+                    <option value="ALMANZA 1" name="ALMANZA 1">ALMANZA 1</option>
+                    <option value="ALMANZA 2" name="ALMANZA 2">ALMANZA 2</option>
+                    <option value="CAA" name="CAA">CAA</option>
+                    <option value="DANIEL FAJARDO" name="DANIEL FAJARDO">DANIEL FAJARDO</option>
+                    <option value="ELIAS ALDANA" name="ELIAS ALDANA">ELIAS ALDANA</option>
+                    <option value="ILAYA" name="ILAYA">ILAYA</option>
+                    <option value="MANUYO 1" name="MANUYO 1">MANUYO 1</option>
+                    <option value="MANUYO 2" name="MANUYO 2">MANUYO 2</option>
+                    <option value="PAMPLONA 1" name="PAMPLONA 1">PAMPLONA 1</option>
+                    <option value="PAMPLONA 2" name="PAMPLONA 2">PAMPLONA 2</option>
+                    <option value="PAMPLONA 3" name="PAMPLONA 3">PAMPLONA 3</option>
+                    <option value="PULANGLUPA 1" name="PULANGLUPA 1">PULANGLUPA 1</option>
+                    <option value="PULANGLUPA 2" name="PULANGLUPA 2">PULANGLUPA 2</option>
+                    <option value="TALON 1" name="TALON 1">TALON 1</option>
+                    <option value="TALON 2" name="TALON 2">TALON 2</option>
+                    <option value="TALON 3" name="TALON 3">TALON 3</option>
+                    <option value="TALON 4" name="TALON 4">TALON 4</option>
+                    <option value="TALON 5" name="TALON 5">TALON 5</option>
+                    <option value="ZAPOTE" name="ZAPOTE">ZAPOTE</option>
+                  </datalist>
+                </input>                </div>
               </div>
               
-                  
+              
               <div class="form-group">
                 <button type="submit" class="btn btn-success btn-size">Submit</button>
               </div>
+
+              <br>
                 
             </form>
           </div>
           
-          <div id="Update" class="tabcontent">
-            <h1>Update</h1>
+          <div id="Update" class="w3-container tabcontent">
+            <h1 class="display-5">Update</h1>
+            <hr/>
+            <form action="/update" method="POST" class="needs-validation" novalidate>
 
-            <form action="/update" method="POST">
+              <div class="form-group row">
+                <input  style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
 
-              <div class="input-holder">
-                <input style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
-
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="updod">Date of Death</label>
-                  <input type="date" placeholder="Date of Death" name="dateOfDeath" id="updod">  
+                  <input required class="form-control"  type="date" placeholder="Date of Death" name="dateOfDeath" id="updod" onChange="updatebday()">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="upfname">First Name</label>
-                  <input type="text" placeholder="First Name" name="fname" id="upfname">
+                  <input required class="form-control" type="text" placeholder="First Name" name="fname" id="upfname">
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="upmname">Middle Name</label>
-                  <input type="text" placeholder="Middle Name" name="mname" id="upmname">  
+                  <input required class="form-control" type="text" placeholder="Middle Name" name="mname" id="upmname">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="uplname">Last Name</label>
-                  <input type="text" placeholder="Last Name" name="lname" id="uplname">  
+                  <input required class="form-control" type="text" placeholder="Last Name" name="lname" id="uplname">  
                 </div>
-                <div class="inputs">
+              </div>
+              <div class="form-group row">
+                <div class="col-lg-2">
                   <label for="upbday">Date of Birth</label>
-                  <input type="date" placeholder="Birthday" name="bday" id="upbday">  
+                  <input required class="form-control" type="date" placeholder="Birthday" name="bday" id="upbday" onChange="updatebday()">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="upage">Age</label>
-                  <input type="text" placeholder="Age" name="age" id="upage">  
+                  <input required class="form-control" type="text" placeholder="Age" name="age" id="upage" readonly>  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="upicd10">ICD-10 Code</label>
-                  <input type="text" placeholder="ICD-10 Code" name="icd10" id="upicd10">  
+                  <input required class="form-control" type="text" placeholder="ICD-10 Code" name="icd10" id="upicd10">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="upcod">Cause of Death</label>
-                  <input type="text" placeholder="Cause of Death" name="causeofdeath" id="upcod">  
+                  <input required class="form-control" type="text" placeholder="Cause of Death" name="causeofdeath" id="upcod">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="uppod">Place of Death</label>
-                  <input type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">  
+                  <input required class="form-control" type="text" placeholder="Place of Death" name="placeofdeath" id="uppod">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2" role="combobox">
                   <label for="upbarangay">Barangay</label>
-                  <input type="text" placeholder="Barangay" name="Barangay" id="upbarangay">  
-                </div>
+                  <input required placeholder="Barangay" name="Barangay" id="upbarangay" class="form-control" list="updateListBarangay">
+                  <datalist id="updateListBarangay">
+                    <option value="ALMANZA 1">ALMANZA 1</option>
+                    <option value="ALMANZA 2">ALMANZA 2</option>
+                    <option value="CAA">CAA</option>
+                    <option value="DANIEL FAJARDO">DANIEL FAJARDO</option>
+                    <option value="ELIAS ALDANA">ELIAS ALDANA</option>
+                    <option value="ILAYA">ILAYA</option>
+                    <option value="MANUYO 1">MANUYO 1</option>
+                    <option value="MANUYO 2">MANUYO 2</option>
+                    <option value="PAMPLONA 1">PAMPLONA 1</option>
+                    <option value="PAMPLONA 2">PAMPLONA 2</option>
+                    <option value="PAMPLONA 3">PAMPLONA 3</option>
+                    <option value="PULANGLUPA 1">PULANGLUPA 1</option>
+                    <option value="PULANGLUPA 2">PULANGLUPA 2</option>
+                    <option value="TALON 1">TALON 1</option>
+                    <option value="TALON 2">TALON 2</option>
+                    <option value="TALON 3">TALON 3</option>
+                    <option value="TALON 4">TALON 4</option>
+                    <option value="TALON 5">TALON 5</option>
+                    <option value="ZAPOTE">ZAPOTE</option>
+                  </datalist> 
+                    
+                </input>                </div>
                 
               </div>
 
@@ -219,56 +371,81 @@
               <div class="form-group">
                 <button type="submit" class="btn btn-warning btn-size" onclick="clicked(event)">Update</button>
               </div>
-              
+              <br>
             </form>
           </div>
           
-          <div id="Delete" class="tabcontent">
-            <h1>Delete</h1>
+          <div id="Delete" class="w3-container tabcontent">
+            <h1 class="display-5">Delete</h1>
+            <hr/>
+            <form action="/delete" method="POST" class="needs-validation" novalidate>
+              <div class="form-group row">
+                <input required class="form-control" style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
 
-            <form action="/delete" method="POST">
-              <div class="input-holder">
-                <input style="display: none;" type="text" placeholder="ID" name="delid" id="delID">
-
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="deldod">Date of Death</label>
-                  <input type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">  
+                  <input required class="form-control" type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="delfname">First Name</label>
-                  <input type="text" placeholder="First Name" name="fname" id="delfname">  
+                  <input required class="form-control" type="text" placeholder="First Name" name="fname" id="delfname">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="delmname">Middle Name</label>
-                  <input type="text" placeholder="Middle Name" name="mname" id="delmname">  
+                  <input required class="form-control" type="text" placeholder="Middle Name" name="mname" id="delmname">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-3">
                   <label for="dellname">Last Name</label>
-                  <input type="text" placeholder="Last Name" name="lname" id="dellname">  
+                  <input required class="form-control" type="text" placeholder="Last Name" name="lname" id="dellname">  
                 </div>
-                <div class="inputs">
+              </div>
+              <div class="form-group row">
+                <div class="col-lg-2">
                   <label for="delbday">Date of Birth</label>
-                  <input type="date" placeholder="Birthday" name="bday" id="delbday">  
+                  <input required class="form-control" type="date" placeholder="Birthday" name="bday" id="delbday">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="delage">Age</label>
-                  <input type="text" placeholder="Age" name="age" id="delage">  
+                  <input required class="form-control" type="text" placeholder="Age" name="age" id="delage" readonly>  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="delicd10">ICD-10 Code</label>
-                  <input type="text" placeholder="ICD-10 Code" name="icd10" id="delicd10">  
+                  <input required class="form-control" type="text" placeholder="ICD-10 Code" name="icd10" id="delicd10">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="delcod">Cause of Death</label>
-                  <input type="text" placeholder="Cause of Death" name="causeofdeath" id="delcod">  
+                  <input required class="form-control" type="text" placeholder="Cause of Death" name="causeofdeath" id="delcod">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="delpod">Place of Death</label>
-                  <input type="text" placeholder="Place of Death" name="placeofdeath" id="delpod">  
+                  <input required class="form-control" type="text" placeholder="Place of Death" name="placeofdeath" id="delpod">  
                 </div>
-                <div class="inputs">
+                <div class="col-lg-2">
                   <label for="delbarangay">Barangay</label>
-                  <input type="text" placeholder="Barangay" name="Barangay" id="delbarangay">  
+                  <input required placeholder="Barangay" name="Barangay" id="delbarangay" class="form-control" list="deleteListBarangay">
+                    <datalist id="deleteListBarangay">
+                    <option value="ALMANZA 1">ALMANZA 1</option>
+                    <option value="ALMANZA 2">ALMANZA 2</option>
+                    <option value="CAA">CAA</option>
+                    <option value="DANIEL FAJARDO">DANIEL FAJARDO</option>
+                    <option value="ELIAS ALDANA">ELIAS ALDANA</option>
+                    <option value="ILAYA">ILAYA</option>
+                    <option value="MANUYO 1">MANUYO 1</option>
+                    <option value="MANUYO 2">MANUYO 2</option>
+                    <option value="PAMPLONA 1">PAMPLONA 1</option>
+                    <option value="PAMPLONA 2">PAMPLONA 2</option>
+                    <option value="PAMPLONA 3">PAMPLONA 3</option>
+                    <option value="PULANGLUPA 1">PULANGLUPA 1</option>
+                    <option value="PULANGLUPA 2">PULANGLUPA 2</option>
+                    <option value="TALON 1">TALON 1</option>
+                    <option value="TALON 2">TALON 2</option>
+                    <option value="TALON 3">TALON 3</option>
+                    <option value="TALON 4">TALON 4</option>
+                    <option value="TALON 5">TALON 5</option>
+                    <option value="ZAPOTE">ZAPOTE</option>
+                  </datalist>
+
+                </input>
                 </div>
               
 
@@ -277,7 +454,7 @@
               <div class="form-group">
                 <button type="submit" class="btn btn-danger btn-size" onclick="clicked(event)">Delete</button>
               </div>
-              
+              <br>
             </form>
           </div>
       
@@ -314,7 +491,7 @@
               <td><%= quotes[i].icd10 %></td>
               <td><%= quotes[i].causeofdeath %></td>
               <td><%= quotes[i].placeofdeath %></td>
-              <td><%= quotes[i].barangay %></td>
+              <td><%= quotes[i].Barangay %></td>
             </tr>
             <% } %>
           </tbody>
@@ -322,26 +499,49 @@
       </div>
 
     
-      <script>
-        function openCity(evt, cityName) {
-          var i, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          document.getElementById(cityName).style.display = "block";
-          evt.currentTarget.className += " active";
-        }
-        </script>
+<script>
+  function tabPane(evt, deathAction) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-border-green", "");
+    }
+    document.getElementById(deathAction).style.display = "block";
+    evt.currentTarget.firstElementChild.className += " w3-border-green";
+  }
+</script>
 
 <script>
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen").click();
 </script>
+<!-- Validation -->
+<script>
+  (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
+
 
 
 
