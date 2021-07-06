@@ -40,7 +40,13 @@ MongoClient.connect(connectionString, {
     app.use('/',express.static(__dirname + '/views'));
     app.use(express.json())
     
-    //allows the user to read data from the database 
+    // Index Page Render
+    app.get('/', (req, res) => {
+        
+        res.render('index.ejs')
+    })
+
+    //Death Page Render
     app.get('/death', (req, res) => {
         db.collection('quotes').find().toArray()
         .then(results => {
@@ -52,56 +58,47 @@ MongoClient.connect(connectionString, {
         .catch(error => console.error(error))
         // ...
         
-      })
+    })
     
-    app.get('/', (req, res) => {
-        db.collection('quotes').find().toArray()
-        .then(results => {
-            console.log("Data retrieve")
-            
-            
+    
+    //Death Statistic Renderer
+    
+    
+    app.get('/death-statistic', (req, res) => {
+  
+        db.collection('quotes').aggregate([
+            {$group: {_id: "$Barangay", myCount: {$sum: 1 }
+        }}
+        ]).toArray(function(err,results){
+            if(err){
+                console.log(err);
+            }else{
+                db.collection('quotes').aggregate([
+                    {$group: {_id: "$causeofdeath", myCount: {$sum: 1 }
+                }}
+                ]).toArray(function(err,results1){
+                    if(err){
+                        console.log(err);
+                    }else{
+                        console.log(results);
+                        console.log(results1);
+                        console.log("Death page Data retrieve")
+                        res.render('death-statistic.ejs', {quotes: results, quotes1: results1} )
+                        
+                   
+                    }
+                })
+
+           
+            }
         })
-        .catch(error => console.error(error))
-        // ...
+            
         
-      })
-      var bar = {};
-      app.get('/death-statistic', (req, res) => {
-        db.collection("quotes", function(err, collection) {
-            collection.find().sort({order_num: 1}).toArray(function(err, result) {
-              if (err) {
-                throw err;
-              } else {
-                for (i=0; i<result.length; i++) {
-                  collectionOne[i] = result[i];
-                }
-              }
-            });
-            db.collection("quotes", function(err, collection) {
-              collection.find().sort({order_num: 1}).toArray(function(err, result) {
-                if (err) {
-                  throw err;
-                } else {
-                  for (i=0; i<result.length; i++) {
-                    collectionTwo[i] = result[i];
-                  }
-                }
-              });
-            });
-            // Thank you aesede!
-            res.render('death-statistic.ejs', {
-              quotes: collectionOne,
-              quotes: collectionTwo
-            });
-            console.log({
-                quotes: collectionOne,
-                quotes: collectionTwo
-              })
         
-          });
-          });
+      
+    });
 
-
+    
     
     
     //submit death.ejs
