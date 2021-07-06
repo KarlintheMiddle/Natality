@@ -96,19 +96,12 @@ MongoClient.connect(connectionString, {
             console.log({
                 quotes: collectionOne,
                 quotes: collectionTwo
-              });)
+              })
         
-      });
-    });
-
-  
-      
+          });
+          });
 
 
-
-      
-
-   
     
     
     //submit death.ejs
