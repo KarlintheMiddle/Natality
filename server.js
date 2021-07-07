@@ -80,8 +80,6 @@ MongoClient.connect(connectionString, {
                     if(err){
                         console.log(err);
                     }else{
-                        console.log(results);
-                        console.log(results1);
                         console.log("Death page Data retrieve")
                         res.render('death-statistic.ejs', {quotes: results, quotes1: results1} )
                         
@@ -92,8 +90,7 @@ MongoClient.connect(connectionString, {
            
             }
         })
-            
-        
+
         
       
     });

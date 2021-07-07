@@ -30,22 +30,32 @@
 
 <script>
   $(document).ready( function () {
-      var table = $('#example').DataTable({
+      var table = $('#barangayTable').DataTable({
+          dom: 'Bfrtip',
+          buttons: [
+              'csv', 'print'
+          ],
+          
+      } );
+
+      $('#barangayTable tbody').on('click', 'tr', function() {
+        $('#barangayTable tbody > tr').removeClass('selected');
+        $(this).addClass('selected');
+      });     
+  } );
+
+  $(document).ready( function () {
+      var table = $('#codTable').DataTable({
           dom: 'Bfrtip',
           buttons: [
               'csv', 'print'
           ]
       } );
 
-      $('#example tbody').on('click', 'tr', function() {
-        $('#example tbody > tr').removeClass('selected');
+      $('#barangayTable tbody').on('click', 'tr', function() {
+        $('#barangayTable tbody > tr').removeClass('selected');
         $(this).addClass('selected');
-      });
-
-      
-
-      
-     
+      });     
   } );
 
  
@@ -55,7 +65,7 @@
     <body>
         <div id="navigation"></div>
         
-        <div class="container-fluid p-3 my-3 border">
+        <!-- <div class="container-fluid p-3 my-3 border">
           <div class="w3-row">
             <a href="javascript:void(0)" onclick="tabPane(event, 'byAge')" id="defaultOpen">
               <div class="w3-third tablinks w3-bottombar w3-hover-light-grey w3-padding">
@@ -87,7 +97,7 @@
           <div class="w3-container tabcontent" id="byBarangay">
             <h1>By Barangay</h1>
             <div class="container-fluid p-3 my-3 border" style="width: 100%;">
-              <table style="width: 100%;" id="example" class="display">
+              <table id="barangayTable" class="display">
                 <thead>
                   <tr>
                     
@@ -112,11 +122,11 @@
           <div class="w3-container tabcontent" id="byCOD">
             <h1>By Cause of Death</h1>
             <div class="container-fluid p-3 my-3 border" style="width: 100%;">
-              <table style="width: 100%;" id="example" class="display">
+              <table id="codTable" class="display">
                 <thead>
                   <tr>
                     
-                    <th>Barangay</th>
+                    <th>Cause of Death</th>
                     <th>Count</th>
                   </tr>
                 </thead>
@@ -134,7 +144,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 
 
 
