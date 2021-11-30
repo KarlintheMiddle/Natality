@@ -58,24 +58,26 @@
                   document.getElementById("upfname").value = table.row( this ).data()[2];
                   document.getElementById("upmname").value = table.row( this ).data()[3];
                   document.getElementById("uplname").value = table.row( this ).data()[4];
-                  document.getElementById("upbday").value = table.row( this ).data()[5];
-                  document.getElementById("upage").value = table.row( this ).data()[6];
-                  document.getElementById("upicd10").value = table.row( this ).data()[7];
-                  document.getElementById("upcod").value = table.row( this ).data()[8];
-                  document.getElementById("uppod").value = table.row( this ).data()[9];
-                  document.getElementById("upbarangay").value = table.row( this ).data()[10];
+                  document.getElementById("upsex").value = table.row( this ).data()[5];
+                  document.getElementById("upbday").value = table.row( this ).data()[6];
+                  document.getElementById("upage").value = table.row( this ).data()[7];
+                  document.getElementById("upicd10").value = table.row( this ).data()[8];
+                  document.getElementById("upcod").value = table.row( this ).data()[9];
+                  document.getElementById("uppod").value = table.row( this ).data()[10];
+                  document.getElementById("upbarangay").value = table.row( this ).data()[11];
 
                   document.getElementById("delID").value = table.row( this ).data()[0];
                   document.getElementById("deldod").value = table.row( this ).data()[1];
                   document.getElementById("delfname").value = table.row( this ).data()[2];
                   document.getElementById("delmname").value = table.row( this ).data()[3];
                   document.getElementById("dellname").value = table.row( this ).data()[4];
-                  document.getElementById("delbday").value = table.row( this ).data()[5];
-                  document.getElementById("delage").value = table.row( this ).data()[6];
-                  document.getElementById("delicd10").value = table.row( this ).data()[7];
-                  document.getElementById("delcod").value = table.row( this ).data()[8];
-                  document.getElementById("delpod").value = table.row( this ).data()[9];
-                  document.getElementById("delbarangay").value = table.row( this ).data()[10];
+                  document.getElementById("delsex").value = table.row( this ).data()[5];
+                  document.getElementById("delbday").value = table.row( this ).data()[6];
+                  document.getElementById("delage").value = table.row( this ).data()[7];
+                  document.getElementById("delicd10").value = table.row( this ).data()[8];
+                  document.getElementById("delcod").value = table.row( this ).data()[9];
+                  document.getElementById("delpod").value = table.row( this ).data()[10];
+                  document.getElementById("delbarangay").value = table.row( this ).data()[11];
 
 
                   
@@ -140,6 +142,7 @@
 
         }
         </script>
+
         <script>
           function updatebday() {
           var upbday = document.getElementById("upbday").value;
@@ -220,24 +223,37 @@
                   <input required type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control" onChange="submitbday()">
                   
                 </div>
+
                 <div class="col-lg-3 ">
                   <label for="subfname">First Name</label>
                   <input required type="text" placeholder="First Name" name="fname" id="subfname" class="form-control">
                 </div>
-                <div class="col-lg-3">
+
+                <div class="col-lg-2">
                   <label for="submname">Middle Name</label>
                   <input required type="text" placeholder="Middle Name" name="mname" id="submname" class="form-control">
                 </div>
+
                 <div class="col-lg-3">
                   <label for="sublname">Last Name</label>
                   <input required type="text" placeholder="Last Name" name="lname" id="sublname" class="form-control">
                 </div>
+
+                <div class="col-lg-2">
+                  <label for="subsex">Sex</label>
+                  <select required placeholder="Sex" name="gender" id="subsex" class="form-control" autocomplete="on" >
+                
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select> 
+                </div>
               </div>
+
+
               <div class="form-group row">
                 <div class="col-lg-2">
                   <label for="subbday">Date of Birth</label>
                   <input required type="date" placeholder="Birthday" name="bday" id="subbday" onChange="submitbday()" class="form-control">  
-                  
                 </div>
                 <div class="col-lg-2">
                   <label for="subage">Age</label>
@@ -257,8 +273,7 @@
                 </div>
                 <div class="col-lg-2">
                   <label for="subbarangay">Barangay</label>
-                  <input required name="Barangay" placeholder="Barangay" id="subbarangay" class="form-control" list="submitListBarangay">
-                  <datalist id="submitListBarangay">
+                  <select required name="Barangay" placeholder="Barangay" id="subbarangay" class="form-control" autocomplete="on">
                     <option value="ALMANZA 1" name="ALMANZA 1">ALMANZA 1</option>
                     <option value="ALMANZA 2" name="ALMANZA 2">ALMANZA 2</option>
                     <option value="CAA" name="CAA">CAA</option>
@@ -278,9 +293,10 @@
                     <option value="TALON 4" name="TALON 4">TALON 4</option>
                     <option value="TALON 5" name="TALON 5">TALON 5</option>
                     <option value="ZAPOTE" name="ZAPOTE">ZAPOTE</option>
-                  </datalist>
-                </input>                </div>
+                  </select> 
+                </input>                
               </div>
+            </div>
               
               
               <div class="form-group">
@@ -299,7 +315,6 @@
 
               <div class="form-group row">
                 <input  style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
-
                 <div class="col-lg-2">
                   <label for="updod">Date of Death</label>
                   <input required class="form-control"  type="date" placeholder="Date of Death" name="dateOfDeath" id="updod" onChange="updatebday()">  
@@ -308,7 +323,7 @@
                   <label for="upfname">First Name</label>
                   <input required class="form-control" type="text" placeholder="First Name" name="fname" id="upfname">
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                   <label for="upmname">Middle Name</label>
                   <input required class="form-control" type="text" placeholder="Middle Name" name="mname" id="upmname">  
                 </div>
@@ -316,6 +331,14 @@
                   <label for="uplname">Last Name</label>
                   <input required class="form-control" type="text" placeholder="Last Name" name="lname" id="uplname">  
                 </div>
+                <div class="col-lg-2">
+                  <label for="upsex">Sex</label>
+                  <select required placeholder="Sex" name="gender" id="upsex" class="form-control" autocomplete="on" >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select> 
+                </div>
+
               </div>
               <div class="form-group row">
                 <div class="col-lg-2">
@@ -340,8 +363,7 @@
                 </div>
                 <div class="col-lg-2" role="combobox">
                   <label for="upbarangay">Barangay</label>
-                  <input required placeholder="Barangay" name="Barangay" id="upbarangay" class="form-control" list="updateListBarangay">
-                  <datalist id="updateListBarangay">
+                  <select required placeholder="Barangay" name="Barangay" id="upbarangay" class="form-control" autocomplete="on">
                     <option value="ALMANZA 1">ALMANZA 1</option>
                     <option value="ALMANZA 2">ALMANZA 2</option>
                     <option value="CAA">CAA</option>
@@ -361,11 +383,12 @@
                     <option value="TALON 4">TALON 4</option>
                     <option value="TALON 5">TALON 5</option>
                     <option value="ZAPOTE">ZAPOTE</option>
-                  </datalist> 
-                    
-                </input>                </div>
+                    </select>
                 
-              </div>
+                    
+                </input>                
+              </div>    
+            </div>
 
               
               <div class="form-group">
@@ -390,7 +413,7 @@
                   <label for="delfname">First Name</label>
                   <input required class="form-control" type="text" placeholder="First Name" name="fname" id="delfname">  
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                   <label for="delmname">Middle Name</label>
                   <input required class="form-control" type="text" placeholder="Middle Name" name="mname" id="delmname">  
                 </div>
@@ -398,7 +421,16 @@
                   <label for="dellname">Last Name</label>
                   <input required class="form-control" type="text" placeholder="Last Name" name="lname" id="dellname">  
                 </div>
+
+                <div class="col-lg-2">
+                  <label for="delsex">Sex</label>
+                  <select required placeholder="Sex" name="gender" id="delsex" class="form-control" autocomplete="on" >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select> 
+                </div>
               </div>
+
               <div class="form-group row">
                 <div class="col-lg-2">
                   <label for="delbday">Date of Birth</label>
@@ -422,8 +454,7 @@
                 </div>
                 <div class="col-lg-2">
                   <label for="delbarangay">Barangay</label>
-                  <input required placeholder="Barangay" name="Barangay" id="delbarangay" class="form-control" list="deleteListBarangay">
-                    <datalist id="deleteListBarangay">
+                  <select required placeholder="Barangay" name="Barangay" id="delbarangay" class="form-control" autocomplete="on">
                     <option value="ALMANZA 1">ALMANZA 1</option>
                     <option value="ALMANZA 2">ALMANZA 2</option>
                     <option value="CAA">CAA</option>
@@ -443,7 +474,7 @@
                     <option value="TALON 4">TALON 4</option>
                     <option value="TALON 5">TALON 5</option>
                     <option value="ZAPOTE">ZAPOTE</option>
-                  </datalist>
+                  </select> 
 
                 </input>
                 </div>
@@ -469,6 +500,7 @@
               <th>First Name</th>
               <th>Middle Name</th>
               <th>Last Name</th>
+              <th>Gender</th>
               <th>Birthday</th>
               <th>Age</th>
               <th>ICD-10 Code</th>
@@ -486,6 +518,7 @@
               <td><%= quotes[i].fname %></td>
               <td><%= quotes[i].mname %></td>
               <td><%= quotes[i].lname %></td>
+              <td><%= quotes[i].gender %></td>
               <td><%= quotes[i].bday %></td>
               <td><%= quotes[i].age %></td>
               <td><%= quotes[i].icd10 %></td>
