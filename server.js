@@ -11,8 +11,7 @@ const fileUpload = require("express-fileupload");
 
 const app = express();
 
-const connectionString =
-	"mongodb+srv://Karl:Lpcho123@cluster0.uamuz.mongodb.net/Natality?retryWrites=true&w=majority";
+const connectionString = "mongodb+srv://Karl:Lpcho123@cluster0.uamuz.mongodb.net/Natality?retryWrites=true&w=majority";
 
 //parser
 app.use(express.urlencoded({ extended: true }));
@@ -162,8 +161,41 @@ MongoClient.connect(connectionString, {
 
 		//Get File Directory
 		app.post("/import", (req, res) => {
-			var importAddress = req.body.myFile;
-			console.log(importAddress);
+			var importAddress = req.files.myFile;
+			//console.log(importAddress);
+
+			const excelData = excelToJson({
+				sourceFile: "./uploads/" + importAddress.name,
+				sheets: [
+					{
+						// Excel Sheet Name
+						name: "Sheet1",
+
+						// Header Row -> be skipped and will not be present at our result object.
+						header: {
+							rows: 1,
+						},
+
+						// Mapping columns to keys
+						columnToKey: {
+							A: "dateOfDeath",
+							B: "fname",
+							C: "mname",
+							D: "lname",
+							E: "gender",
+							F: "birthday",
+							G: "age",
+							H: "icd10",
+							I: "causeofdeath",
+							J: "placeofdeath",
+							K: "Barangay",
+						},
+					},
+				],
+			});
+
+			// -> Log Excel Data to Console
+			console.log(excelData);
 
 			try {
 				if (!req.files) {
@@ -193,6 +225,12 @@ MongoClient.connect(connectionString, {
 			} catch (err) {
 				res.status(500).send(err);
 			}
+
+			quotesCollection.insertMany(excelData.Sheet1, (err, res) => {
+				if (err) throw err;
+
+				console.log("Number of documents inserted: " + res.insertedCount);
+			});
 		});
 
 		app.listen();

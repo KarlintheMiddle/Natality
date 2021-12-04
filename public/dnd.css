@@ -1,6 +1,6 @@
 .drop-zone {
-	max-width: 200px;
-	height: 200px;
+	max-width: 400px;
+	height: 100%;
 	padding: 25px;
 	display: flex;
 	align-items: center;
@@ -53,4 +53,35 @@
 
 .show {
 	display: block;
+}
+
+.alert {
+	z-index: 10;
+}
+
+.form-holder {
+	padding: 10px;
+	padding-left: 20%;
+	padding-right: 20%;
+	display: grid;
+
+	grid-template-columns: 40% 60%;
+}
+
+.drop-zone {
+	grid-column: 1;
+}
+
+.button-holder {
+	grid-column: 2;
+	padding: 20px;
+	text-align: center;
+}
+
+.label {
+	margin: 0;
+	padding-top: 2px;
+	font-size: x-small;
+	font-weight: 400;
+	color: #757575;
 }

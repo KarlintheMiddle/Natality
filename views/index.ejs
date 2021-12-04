@@ -1,122 +1,121 @@
 <!DOCTYPE html>
 
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>LPCHO</title>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>LPCHO</title>
 
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
 
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"
+		></script>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        <script>
-          $(function() {
-            $("#navigation").load("/navigation.html");
-            
-          });
-        </script>
+		<script>
+			$(function () {
+				$("#navigation").load("/navigation.html");
+			});
+		</script>
 
-        <script>
-          $(document).ready( function () {
-              var table = $('#example').DataTable();
-              
-              $('#example tbody').on( 'click', 'tr', function () {
-                  console.log( table.row( this ).data() );
+		<script>
+			$(document).ready(function () {
+				var table = $("#example").DataTable();
 
-                  document.getElementById("dbID").value = table.row( this ).data()[0];
-                  document.getElementById("updod").value = table.row( this ).data()[1];
-                  document.getElementById("upfname").value = table.row( this ).data()[2];
-                  document.getElementById("upmname").value = table.row( this ).data()[3];
-                  document.getElementById("uplname").value = table.row( this ).data()[4];
-                  document.getElementById("upbday").value = table.row( this ).data()[5];
-                  document.getElementById("upage").value = table.row( this ).data()[6];
-                  document.getElementById("upicd10").value = table.row( this ).data()[7];
-                  document.getElementById("upcod").value = table.row( this ).data()[8];
-                  document.getElementById("uppod").value = table.row( this ).data()[9];
-                  document.getElementById("upbarangay").value = table.row( this ).data()[10];
+				$("#example tbody").on("click", "tr", function () {
+					console.log(table.row(this).data());
 
-                  document.getElementById("delID").value = table.row( this ).data()[0];
-                  document.getElementById("deldod").value = table.row( this ).data()[1];
-                  document.getElementById("delfname").value = table.row( this ).data()[2];
-                  document.getElementById("delmname").value = table.row( this ).data()[3];
-                  document.getElementById("dellname").value = table.row( this ).data()[4];
-                  document.getElementById("delbday").value = table.row( this ).data()[5];
-                  document.getElementById("delage").value = table.row( this ).data()[6];
-                  document.getElementById("delicd10").value = table.row( this ).data()[7];
-                  document.getElementById("delcod").value = table.row( this ).data()[8];
-                  document.getElementById("delpod").value = table.row( this ).data()[9];
-                  document.getElementById("delbarangay").value = table.row( this ).data()[10];
+					document.getElementById("dbID").value = table.row(this).data()[0];
+					document.getElementById("updod").value = table.row(this).data()[1];
+					document.getElementById("upfname").value = table.row(this).data()[2];
+					document.getElementById("upmname").value = table.row(this).data()[3];
+					document.getElementById("uplname").value = table.row(this).data()[4];
+					document.getElementById("upbday").value = table.row(this).data()[5];
+					document.getElementById("upage").value = table.row(this).data()[6];
+					document.getElementById("upicd10").value = table.row(this).data()[7];
+					document.getElementById("upcod").value = table.row(this).data()[8];
+					document.getElementById("uppod").value = table.row(this).data()[9];
+					document.getElementById("upbarangay").value = table.row(this).data()[10];
 
+					document.getElementById("delID").value = table.row(this).data()[0];
+					document.getElementById("deldod").value = table.row(this).data()[1];
+					document.getElementById("delfname").value = table.row(this).data()[2];
+					document.getElementById("delmname").value = table.row(this).data()[3];
+					document.getElementById("dellname").value = table.row(this).data()[4];
+					document.getElementById("delbday").value = table.row(this).data()[5];
+					document.getElementById("delage").value = table.row(this).data()[6];
+					document.getElementById("delicd10").value = table.row(this).data()[7];
+					document.getElementById("delcod").value = table.row(this).data()[8];
+					document.getElementById("delpod").value = table.row(this).data()[9];
+					document.getElementById("delbarangay").value = table.row(this).data()[10];
+				});
 
-                  
-                 
-              } );
+				$("#example tbody").on("click", "tr", function () {
+					$("#example tbody > tr").removeClass("selected");
+					$(this).addClass("selected");
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="navigation"></div>
+		<h1 class="display-1 text-center">Las Piñas City Health Office</h1>
 
-              $('#example tbody').on('click', 'tr', function() {
-                $('#example tbody > tr').removeClass('selected');
-                $(this).addClass('selected');
-              });
-              
+		<div class="container">
+			<br />
 
-              
-             
-          } );
+			<div class="row">
+				<!-- Natality -->
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<h1 class="card-title">Natality</h1>
+							<hr />
+							<p class="card-text">Database record of Birth Certificate</p>
+							<a href="#" class="btn btn-success">Encode</a>
+							<a href="#" class="btn btn-success">Statistic</a>
+						</div>
+					</div>
+				</div>
 
-         
-        </script>
-    </head>
-    <body>
-      <div id="navigation"></div>
-      <h1 class="display-1 text-center">Las Piñas City Health Office</h1>
-      
-      <div class="container">
-
-        
-
-        <br>
-        
-        <div class="row">
-          
-           <!-- Natality -->
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title">Natality</h1>
-                  <hr>
-                  <p class="card-text">Database record of Birth Certificate</p>
-                  <a href="#" class="btn btn-success">Encode</a>
-                  <a href="#" class="btn btn-success">Statistic</a>
-
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Death -->
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="card-title">Death</h1>
-                  <hr>
-                  <p class="card-text">Database record of Death Certificates</p>
-                  <a href="death" class="btn btn-success">Encode</a>
-                  <a href="death-statistic" class="btn btn-success">Statistic</a>
-                  
- 
-                </div>
-              </div>
-
-            </div>
-
-
-        </div>
-      </div>
-    </body>
+				<!-- Death -->
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<h1 class="card-title">Death</h1>
+							<hr />
+							<p class="card-text">Database record of Death Certificates</p>
+							<a href="death" class="btn btn-success">Encode</a>
+							<a href="death-statistic" class="btn btn-success">Statistic</a>
+							<a href="death-import" class="btn btn-success">import</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

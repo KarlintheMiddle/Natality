@@ -36,6 +36,7 @@
 			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 			crossorigin="anonymous"
 		></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js"></script>
 
 		<link
 			rel="stylesheet"
@@ -53,51 +54,81 @@
 			});
 		</script>
 
+		<!-- datatables -->
 		<script>
 			$(document).ready(function () {
-				var table = $("#barangayTable").DataTable({
+				var table = $("#example").DataTable({
 					dom: "Bfrtip",
 					buttons: ["csv", "print"],
+					columnDefs: [
+						{
+							defaultContent: "-",
+							targets: "_all",
+						},
+					],
 				});
 
-				$("#barangayTable tbody").on("click", "tr", function () {
-					$("#barangayTable tbody > tr").removeClass("selected");
-					$(this).addClass("selected");
-				});
-			});
-
-			$(document).ready(function () {
-				var table = $("#codTable").DataTable({
-					dom: "Bfrtip",
-					buttons: ["csv", "print"],
-				});
-
-				$("#barangayTable tbody").on("click", "tr", function () {
-					$("#barangayTable tbody > tr").removeClass("selected");
+				$("#example tbody").on("click", "tr", function () {
+					$("#example tbody > tr").removeClass("selected");
 					$(this).addClass("selected");
 				});
 			});
 		</script>
+
+		<!-- Datatable -->
+		<!-- <script type="text/javascript" src="/datatable.js"></script> -->
 	</head>
 	<body>
 		<div id="navigation"></div>
 
-		<div class="alert alert-success hide" id="alertSuccess">
-			<strong>Upload Success</strong>
-		</div>
+		<div class="container-md p-3 my-3 border">
+			<form action="/import" method="POST" enctype="multipart/form-data">
+				<div class="form-holder">
+					<div class="drop-zone">
+						<span class="drop-zone__promt">Drop file here or Click to Upload</span>
+						<input type="file" name="myFile" class="drop-zone__input" id="drop-zone__input" accept=".xls, .xlsx" />
+					</div>
+					<div class="button-holder">
+						<label for="previewFile" class="label">1. Preview on the table below</label>
+						<button type="button" name="" id="previewFile" class="btn btn-info btn-block">Show Preview</button>
 
-		<div class="alert alert-danger hide" id="alertDanger">
-			<strong>Upload Failed</strong>
-		</div>
+						<label for="uploadFile" class="label">2. upload the file to the system</label>
+						<button type="submit" name="" id="uploadFile" class="btn btn-primary btn-block">Upload File</button>
+					</div>
+				</div>
+			</form>
 
-		<form action="/import" method="POST" enctype="multipart/form-data">
-			<div class="drop-zone">
-				<span class="drop-zone__promt">Drop file here or Click to Upload</span>
-				<input type="file" name="myFile" class="drop-zone__input" />
+			<div class="alert alert-success hide" id="alertSuccess">
+				<strong>Upload Success</strong>
 			</div>
 
-			<button type="submit" name="" id="uploadFile">Submit</button>
-		</form>
+			<div class="alert alert-danger hide" id="alertDanger">
+				<strong>Upload Failed</strong>
+			</div>
+		</div>
+
+		<!-- TABLE -->
+		<div class="container-fluid p-3 my-3 border" style="width: 100%">
+			<table style="width: 100%" id="example" class="display">
+				<thead>
+					<tr>
+						<th style="display: none">ID</th>
+						<th>Date of Death</th>
+						<th>First Name</th>
+						<th>Middle Name</th>
+						<th>Last Name</th>
+						<th>Gender</th>
+						<th>Birthday</th>
+						<th>Age</th>
+						<th>ICD-10 Code</th>
+						<th>Cause of Death</th>
+						<th>Place of Death</th>
+						<th>Barangay</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
 
 		<script src="/dnd.js"></script>
 
@@ -111,10 +142,7 @@
 				}
 				tablinks = document.getElementsByClassName("tablinks");
 				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(
-						" w3-border-green",
-						""
-					);
+					tablinks[i].className = tablinks[i].className.replace(" w3-border-green", "");
 				}
 				document.getElementById(statSelect).style.display = "block";
 				evt.currentTarget.firstElementChild.className += " w3-border-green";
