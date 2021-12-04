@@ -124,7 +124,7 @@ function addData(json) {
 		console.log(
 			mytable.row
 				.add([
-					object.dateOfDeath,
+					new Date(object.dateOfDeath),
 					object.fname,
 					object.mname,
 					object.lname,

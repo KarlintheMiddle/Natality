@@ -39,7 +39,7 @@ MongoClient.connect(connectionString, {
 		//connects to the database
 		console.log("Connected to Database");
 		const db = client.db("Natality");
-		const quotesCollection = db.collection("quotes");
+		const quotesCollection = db.collection("death");
 
 		//middlewares
 		app.set("view engine", "ejs");
@@ -55,12 +55,12 @@ MongoClient.connect(connectionString, {
 
 		//Death Page Render
 		app.get("/death", (req, res) => {
-			db.collection("quotes")
+			db.collection("death")
 				.find()
 				.toArray()
 				.then((results) => {
 					console.log("Death page Data retrieve");
-					res.render("death.ejs", { quotes: results });
+					res.render("death.ejs", { death: results });
 					//console.log({quotes: results});
 				})
 				.catch((error) => console.error(error));
@@ -69,7 +69,7 @@ MongoClient.connect(connectionString, {
 
 		//Death Statistic Renderer
 		app.get("/death-statistic", (req, res) => {
-			db.collection("quotes")
+			db.collection("death")
 				.aggregate([
 					{
 						$facet: {
@@ -80,7 +80,7 @@ MongoClient.connect(connectionString, {
 				.toArray()
 				.then((results) => {
 					console.log("Death Statistic page Data retrieve");
-					res.render("death-statistic.ejs", { quotes: results });
+					res.render("death-statistic.ejs", { death: results });
 					console.log(results);
 				});
 		});
@@ -91,7 +91,7 @@ MongoClient.connect(connectionString, {
 		});
 
 		//submit death.ejs
-		app.post("/quotes", (req, res) => {
+		app.post("/death", (req, res) => {
 			quotesCollection
 				.insertOne(req.body)
 				.then((result) => {

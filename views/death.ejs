@@ -157,12 +157,12 @@
             <h1 class="display-5">Submit</h1>
             <hr/>
             
-            <form action="/quotes" method="POST" class="needs-validation" novalidate>
+            <form action="/death" method="POST" class="needs-validation" novalidate>
 
               <div class= "form-group row">
                 <div class="col-lg-2">
                   <label for="focusdod" class="form-label">Date of Death</label>
-                  <input required type="date" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control" onChange="submitbday()">
+                  <input required type="datetime-local" placeholder="Date of Death" name="dateOfDeath" id="focusdod" class="form-control" onChange="submitbday()">
                   
                 </div>
 
@@ -259,7 +259,7 @@
                 <input  style="display: none;" type="text" placeholder="ID" name="id" id="dbID">
                 <div class="col-lg-2">
                   <label for="updod">Date of Death</label>
-                  <input required class="form-control"  type="date" placeholder="Date of Death" name="dateOfDeath" id="updod" onChange="updatebday()">  
+                  <input required class="form-control"  type="datetime-local" placeholder="Date of Death" name="dateOfDeath" id="updod" onChange="updatebday()">  
                 </div>
                 <div class="col-lg-3">
                   <label for="upfname">First Name</label>
@@ -349,7 +349,7 @@
 
                 <div class="col-lg-2">
                   <label for="deldod">Date of Death</label>
-                  <input  class="form-control" type="date" placeholder="Date of Death" name="dateOfDeath" id="deldod">  
+                  <input  class="form-control" type="datetime-local" placeholder="Date of Death" name="dateOfDeath" id="deldod">  
                 </div>
                 <div class="col-lg-3">
                   <label for="delfname">First Name</label>
@@ -453,20 +453,20 @@
           </thead>
           <tbody>
             
-            <% for(var i = 0; i < quotes.length; i++) {%>
+            <% for(var i = 0; i < death.length; i++) {%>
             <tr>
-              <td style="display: none;"><%= quotes[i]._id %></td>
-              <td><%= new Date(quotes[i].dateOfDeath).toISOString().substring(0, 10) %></td>
-              <td><%= quotes[i].fname %></td>
-              <td><%= quotes[i].mname %></td>
-              <td><%= quotes[i].lname %></td>
-              <td><%= quotes[i].gender %></td>
-              <td><%= quotes[i].bday %></td>
-              <td><%= quotes[i].age %></td>
-              <td><%= quotes[i].icd10 %></td>
-              <td><%= quotes[i].causeofdeath %></td>
-              <td><%= quotes[i].placeofdeath %></td>
-              <td><%= quotes[i].Barangay %></td>
+              <td style="display: none;"><%= death[i]._id %></td>
+              <td><%= new Date(death[i].dateOfDeath) %></td>
+              <td><%= death[i].fname %></td>
+              <td><%= death[i].mname %></td>
+              <td><%= death[i].lname %></td>
+              <td><%= death[i].gender %></td>
+              <td><%= death[i].bday %></td>
+              <td><%= death[i].age %></td>
+              <td><%= death[i].icd10 %></td>
+              <td><%= death[i].causeofdeath %></td>
+              <td><%= death[i].placeofdeath %></td>
+              <td><%= death[i].Barangay %></td>
             </tr>
             <% } %>
           </tbody>
