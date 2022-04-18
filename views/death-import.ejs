@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Death Import</title>
+
+		<link rel="stylesheet" href="/style.css" />
+		<link rel="stylesheet" href="/dnd.css" />
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js"></script>
+
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.css"
+		/>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+		<script src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.25/af-2.3.7/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/datatables.min.js"></script>
+		<script src="https://unpkg.com/@mongodb-js/charts-embed-dom@beta"></script>
+		<script>
+			$(function () {
+				$("#navigation").load("/navigation.html");
+			});
+		</script>
+
+		<!-- datatables -->
+		<script>
+			$(document).ready(function () {
+				var table = $("#example").DataTable({
+					dom: "Bfrtip",
+					buttons: ["csv", "print"],
+					columnDefs: [
+						{
+							defaultContent: "",
+							targets: "_all",
+						},
+					],
+				});
+
+				$("#example tbody").on("click", "tr", function () {
+					$("#example tbody > tr").removeClass("selected");
+					$(this).addClass("selected");
+				});
+			});
+		</script>
+
+		<!-- Datatable -->
+		<!-- <script type="text/javascript" src="/datatable.js"></script> -->
+	</head>
+	<body>
+		<div id="navigation"></div>
+
+		<div class="container-md p-3 my-3 border">
+			<form action="/import" method="POST" enctype="multipart/form-data">
+				<div class="form-holder">
+					<div class="drop-zone">
+						<span class="drop-zone__promt">Drop file here or Click to Upload</span>
+						<input type="file" name="myFile" class="drop-zone__input" id="drop-zone__input" accept=".xls, .xlsx" />
+					</div>
+					<div class="button-holder">
+						<label for="previewFile" class="label">1. Preview on the table below</label>
+						<button type="button" name="" id="previewFile" class="btn btn-info btn-block">Show Preview</button>
+
+						<label for="uploadFile" class="label">2. upload the file to the system</label>
+						<button type="submit" name="" id="uploadFile" class="btn btn-primary btn-block">Upload File</button>
+					</div>
+				</div>
+			</form>
+
+			<div class="alert alert-success hide" id="alertSuccess">
+				<strong>Upload Success</strong>
+			</div>
+
+			<div class="alert alert-danger hide" id="alertDanger">
+				<strong>Upload Failed</strong>
+			</div>
+		</div>
+
+		<!-- TABLE -->
+		<div class="container-fluid p-3 my-3 border" style="width: 100%">
+			<table style="width: 100%" id="example" class="display">
+				<thead>
+					<tr>
+						<th style="display: none">ID</th>
+						<th>Date of Death</th>
+						<th>First Name</th>
+						<th>Middle Name</th>
+						<th>Last Name</th>
+						<th>Gender</th>
+						<th>Birthday</th>
+						<th>Age</th>
+						<th>ICD-10 Code</th>
+						<th>Cause of Death</th>
+						<th>Place of Death</th>
+						<th>Barangay</th>
+					</tr>
+				</thead>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+
+		<script src="/dnd.js"></script>
+
+		<!-- Tabpane -->
+		<script>
+			function tabPane(evt, statSelect) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" w3-border-green", "");
+				}
+				document.getElementById(statSelect).style.display = "block";
+				evt.currentTarget.firstElementChild.className += " w3-border-green";
+			}
+		</script>
+		<script>
+			// Get the element with id="defaultOpen" and click on it
+			document.getElementById("defaultOpen").click();
+		</script>
+	</body>
+</html>
